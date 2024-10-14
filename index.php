@@ -55,7 +55,7 @@
         <div class="container">
             <a class="navbar-brand d-flex justify-content-between align-items-center order-lg-0" href="index.php">
                 <img src="images/Logo.png" alt="site icon" style="width: 40px; height: 40px;">
-                <span class="f1" style="margin-left: 20px;">เขียนฝัน</span>
+                <span class="f1" style="margin-left: 20px;">เขียนฝันAA</span>
             </a>
 
             <div class="order-lg-2 nav-btns d-flex align-items-center ms-auto">
