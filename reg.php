@@ -62,7 +62,7 @@
     </div>
 
     <?php
-   <?php
+
 include_once("connectdb.php"); // เชื่อมต่อฐานข้อมูล
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
