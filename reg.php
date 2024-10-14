@@ -64,7 +64,7 @@
     <?php
     include_once("connectdb.php");
 
-    if (isset($_POST['Submit'])) {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // ทำการเข้ารหัสรหัสผ่าน
         $cpassword =($_POST['cpassword']);
 
