@@ -62,17 +62,8 @@
     </div>
 
     <?php
-
-include_once("connectdb.php"); // เชื่อมต่อฐานข้อมูล
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // แสดงข้อมูลที่ส่งมาจากฟอร์ม
-    var_dump($_POST);
-
-    // ตรวจสอบการเชื่อมต่อ
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
+    var_dump($_POST); // ตรวจสอบข้อมูลที่ส่งมาจากฟอร์ม
 
     // เตรียมข้อมูล
     $cfullname = mysqli_real_escape_string($conn, $_POST['cfullname']);
@@ -85,6 +76,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO `customer` (`c_fullname`, `c_address1`, `c_phonnumber`, `c_email`, `c_password`) 
             VALUES ('$cfullname', '$caddress', '$cphonnumber', '$cemail', '$cpassword')";
 
+    echo $sql; // แสดงคำสั่ง SQL
+
     // ตรวจสอบการคิวรี
     if (mysqli_query($conn, $sql)) {
         echo "<script>alert('ยินดีต้อนรับสู่ร้านเขียนฝัน Please sign in'); window.location='c-sign-in.php';</script>";
@@ -92,10 +85,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<script>alert('เกิดข้อผิดพลาด: " . mysqli_error($conn) . "');</script>";
     }
 
-    // ปิดการเชื่อมต่อ
     mysqli_close($conn);
 }
-?>
+    ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
