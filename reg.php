@@ -56,7 +56,7 @@
                     <label for="floatingPassword"><span class="f1">Password</span></label>
                 </div>
                
-                <button class="btn btn-primary w-100 py-2" type="submit" name="Submit"><span class="f1">สมัครสมาชิก</span></button>
+                <button class="btn btn-primary w-100 py-2" type="submit" ><span class="f1">สมัครสมาชิก</span></button>
             </form><br>
         </main>
     </div>
