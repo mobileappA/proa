@@ -63,40 +63,40 @@
 
     <?php
    <?php
-   include_once("connectdb.php"); // เชื่อมต่อฐานข้อมูล
-   
-   if ($_SERVER["REQUEST_METHOD"] == "POST") {
-       // แสดงข้อมูลที่ส่งมาจากฟอร์ม
-       var_dump($_POST);
-   
-       // ตรวจสอบการเชื่อมต่อ
-       if (!$conn) {
-           die("Connection failed: " . mysqli_connect_error());
-       }
-   
-       // เตรียมข้อมูล
-       $cfullname = mysqli_real_escape_string($conn, $_POST['cfullname']);
-       $caddress = mysqli_real_escape_string($conn, $_POST['caddress']);
-       $cphonnumber = mysqli_real_escape_string($conn, $_POST['cphonnumber']);
-       $cemail = mysqli_real_escape_string($conn, $_POST['cemail']);
-       $cpassword = password_hash($_POST['cpassword'], PASSWORD_DEFAULT); // เข้ารหัสรหัสผ่าน
-   
-       // คำสั่ง SQL
-       $sql = "INSERT INTO `customer` (`c_fullname`, `c_address1`, `c_phonnumber`, `c_email`, `c_password`) 
-               VALUES ('$cfullname', '$caddress', '$cphonnumber', '$cemail', '$cpassword')";
-   
-       // ตรวจสอบการคิวรี
-       if (mysqli_query($conn, $sql)) {
-           echo "<script>alert('ยินดีต้อนรับสู่ร้านเขียนฝัน Please sign in'); window.location='c-sign-in.php';</script>";
-       } else {
-           echo "<script>alert('เกิดข้อผิดพลาด: " . mysqli_error($conn) . "');</script>";
-       }
-   
-       // ปิดการเชื่อมต่อ
-       mysqli_close($conn);
-   }
-   ?>
-   
+include_once("connectdb.php"); // เชื่อมต่อฐานข้อมูล
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // แสดงข้อมูลที่ส่งมาจากฟอร์ม
+    var_dump($_POST);
+
+    // ตรวจสอบการเชื่อมต่อ
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+
+    // เตรียมข้อมูล
+    $cfullname = mysqli_real_escape_string($conn, $_POST['cfullname']);
+    $caddress = mysqli_real_escape_string($conn, $_POST['caddress']);
+    $cphonnumber = mysqli_real_escape_string($conn, $_POST['cphonnumber']);
+    $cemail = mysqli_real_escape_string($conn, $_POST['cemail']);
+    $cpassword = password_hash($_POST['cpassword'], PASSWORD_DEFAULT); // เข้ารหัสรหัสผ่าน
+
+    // คำสั่ง SQL
+    $sql = "INSERT INTO `customer` (`c_fullname`, `c_address1`, `c_phonnumber`, `c_email`, `c_password`) 
+            VALUES ('$cfullname', '$caddress', '$cphonnumber', '$cemail', '$cpassword')";
+
+    // ตรวจสอบการคิวรี
+    if (mysqli_query($conn, $sql)) {
+        echo "<script>alert('ยินดีต้อนรับสู่ร้านเขียนฝัน Please sign in'); window.location='c-sign-in.php';</script>";
+    } else {
+        echo "<script>alert('เกิดข้อผิดพลาด: " . mysqli_error($conn) . "');</script>";
+    }
+
+    // ปิดการเชื่อมต่อ
+    mysqli_close($conn);
+}
+?>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
