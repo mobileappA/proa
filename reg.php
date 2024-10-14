@@ -67,11 +67,15 @@
  
      if ($_SERVER["REQUEST_METHOD"] == "POST") {
          // ทำการเข้ารหัสรหัสผ่าน
+         $cfullname = mysqli_real_escape_string($conn, $_POST['cfullname']);
+         $caddress = mysqli_real_escape_string($conn, $_POST['caddress']);
+         $cphonnumber = mysqli_real_escape_string($conn, $_POST['cphonnumber']);
+         $cemail = mysqli_real_escape_string($conn, $_POST['cemail']);
          $cpassword =($_POST['cpassword']);
  
          // เตรียมคิวรี
          $sql = "INSERT INTO customer (c_fullname, c_address1, c_phonnumber, c_email, c_password) 
-                 VALUES ('{$_POST['cfullname']}', '{$_POST['caddress']}', '{$_POST['cphonnumber']}', '{$_POST['cemail']}', '$cpassword')";
+                 VALUES ('$cfullname','$caddress,$cphonnumber','$cemail','$cpassword')";
  
          // ตรวจสอบว่าคิวรีสำเร็จหรือไม่
          if (mysqli_query($conn, $sql)) {
@@ -83,7 +87,7 @@
  
      mysqli_close($conn);
      ?>
-    ?>
+    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
