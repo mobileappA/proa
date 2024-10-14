@@ -70,11 +70,11 @@
          $cpassword =($_POST['cpassword']);
  
          // เตรียมคิวรี
-         $sql = "INSERT INTO customer (c_fullname, c_address1, c_phonnumber, c_email, c_password) 
+         $sqli = "INSERT INTO customer (c_fullname, c_address1, c_phonnumber, c_email, c_password) 
                  VALUES ('{$_POST['cfullname']}', '{$_POST['caddress']}', '{$_POST['cphonnumber']}', '{$_POST['cemail']}', '$cpassword')";
  
          // ตรวจสอบว่าคิวรีสำเร็จหรือไม่
-         if (mysqli_query($conn, $sql)) {
+         if (mysqli_query($conn, $sqli)) {
              echo "<script>alert('ยินดีต้อนรับสู่ร้านเขียนฝัน Please sign in'); window.location='c-sign-in.php';</script>";
          } else {
              echo "<script>alert('เกิดข้อผิดพลาด: " . mysqli_error($conn) . "');</script>";
