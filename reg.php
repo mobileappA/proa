@@ -62,28 +62,42 @@
     </div>
 
     <?php
- 
-     include_once("connectdb.php");
- 
-     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-         // ทำการเข้ารหัสรหัสผ่าน
-         $cpassword =($_POST['cpassword']);
- 
-         // เตรียมคิวรี
-         $sqli = "INSERT INTO customer (c_fullname, c_address1, c_phonnumber, c_email, c_password) 
-                 VALUES ('{$_POST['cfullname']}', '{$_POST['caddress']}', '{$_POST['cphonnumber']}', '{$_POST['cemail']}', '$cpassword')";
- 
-         // ตรวจสอบว่าคิวรีสำเร็จหรือไม่
-         if (mysqli_query($conn, $sqli)) {
-             echo "<script>alert('ยินดีต้อนรับสู่ร้านเขียนฝัน Please sign in'); window.location='c-sign-in.php';</script>";
-         } else {
-             echo "<script>alert('เกิดข้อผิดพลาด: " . mysqli_error($conn) . "');</script>";
-         }
-     }
- 
-     mysqli_close($conn);
-     ?>
-    ?>
+include_once("connectdb.php"); // เชื่อมต่อฐานข้อมูล
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // ตรวจสอบว่าข้อมูลฟอร์มมีการส่งมาหรือไม่
+    if (isset($_POST['cfullname'], $_POST['caddress'], $_POST['cphonnumber'], $_POST['cemail'], $_POST['cpassword'])) {
+        
+        // ทำการเข้ารหัสรหัสผ่าน
+        $cpassword =($_POST['cpassword']);
+        
+        // เตรียมคิวรี
+        $sqli = "INSERT INTO customer (c_fullname, c_address1, c_phonnumber, c_email, c_password) 
+                 VALUES (?, ?, ?, ?, ?)";
+
+        // เตรียม statement
+        $stmt = mysqli_prepare($conn, $sqli);
+        
+        // ผูกตัวแปร
+        mysqli_stmt_bind_param($stmt, "sssss", $_POST['cfullname'], $_POST['caddress'], $_POST['cphonnumber'], $_POST['cemail'], $cpassword);
+
+        // ตรวจสอบว่าคิวรีสำเร็จหรือไม่
+        if (mysqli_stmt_execute($stmt)) {
+            echo "<script>alert('ยินดีต้อนรับสู่ร้านเขียนฝัน Please sign in'); window.location='c-sign-in.php';</script>";
+        } else {
+            echo "<script>alert('เกิดข้อผิดพลาด: " . mysqli_stmt_error($stmt) . "');</script>";
+        }
+
+        // ปิด statement
+        mysqli_stmt_close($stmt);
+    } else {
+        echo "<script>alert('กรุณากรอกข้อมูลให้ครบถ้วน');</script>";
+    }
+}
+
+// ปิดการเชื่อมต่อฐานข้อมูล
+mysqli_close($conn);
+?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
