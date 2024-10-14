@@ -84,9 +84,55 @@
     </fieldset>
 </form>
 <hr>
-
 <?php
-// PHP code สำหรับการเพิ่มสินค้าและการจัดการไฟล์ที่คุณให้มา
+include_once("connectdb.php"); // เชื่อมต่อฐานข้อมูล
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // ตรวจสอบว่าข้อมูลฟอร์มมีการส่งมาหรือไม่
+    if (isset($_POST['pname'], $_POST['pdetail'], $_POST['pprice'], $_POST['pt'])) {
+        // รับข้อมูลจากฟอร์ม
+        $pname = $_POST['pname'];
+        $pdetail = $_POST['pdetail'];
+        $pprice = $_POST['pprice'];
+        $pt = $_POST['pt'];
+
+        // เริ่มต้นตัวแปรสำหรับการอัปโหลดไฟล์
+        $uploads = [];
+        for ($i = 1; $i <= 4; $i++) {
+            if (isset($_FILES["pimg$i"]) && $_FILES["pimg$i"]['error'] == 0) {
+                // เช็คไฟล์และอัปโหลด
+                $uploads[$i] = 'uploads/' . basename($_FILES["pimg$i"]["name"]);
+                move_uploaded_file($_FILES["pimg$i"]["tmp_name"], $uploads[$i]);
+            } else {
+                $uploads[$i] = null; // หากไม่มีไฟล์ให้เซ็ตเป็น null
+            }
+        }
+
+        // เตรียมคำสั่ง SQL
+        $sql = "INSERT INTO products (p_name, p_detail, p_price, pt_id, p_img1, p_img2, p_img3, p_img4) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        
+        // เตรียม statement
+        $stmt = mysqli_prepare($conn, $sql);
+        
+        // ผูกตัวแปร
+        mysqli_stmt_bind_param($stmt, "ssissssss", $pname, $pdetail, $pprice, $pt, $uploads[1], $uploads[2], $uploads[3], $uploads[4]);
+
+        // ตรวจสอบว่าคิวรีสำเร็จหรือไม่
+        if (mysqli_stmt_execute($stmt)) {
+            echo "<script>alert('เพิ่มสินค้าสำเร็จ'); window.location='your_success_page.php';</script>";
+        } else {
+            echo "<script>alert('เกิดข้อผิดพลาด: " . mysqli_stmt_error($stmt) . "');</script>";
+        }
+
+        // ปิด statement
+        mysqli_stmt_close($stmt);
+    } else {
+        echo "<script>alert('กรุณากรอกข้อมูลให้ครบถ้วน');</script>";
+    }
+}
+
+// ปิดการเชื่อมต่อฐานข้อมูล
+mysqli_close($conn);
 ?>
 
 </body>
