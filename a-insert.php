@@ -85,55 +85,98 @@
 </form>
 <hr>
 <?php
-include_once("connectdb.php"); // เชื่อมต่อฐานข้อมูล
+if (isset($_POST['Submit'])) {
+    // กำหนดตัวแปรสำหรับชื่อไฟล์ใหม่
+    $new_picture1 = '';
+    $new_picture2 = '';
+    $new_picture3 = '';
+    $new_picture4 = '';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // ตรวจสอบว่าข้อมูลฟอร์มมีการส่งมาหรือไม่
-    if (isset($_POST['pname'], $_POST['pdetail'], $_POST['pprice'], $_POST['pt'])) {
-        // รับข้อมูลจากฟอร์ม
-        $pname = $_POST['pname'];
-        $pdetail = $_POST['pdetail'];
-        $pprice = $_POST['pprice'];
-        $pt = $_POST['pt'];
+    // สร้าง SQL สำหรับเพิ่มข้อมูลสินค้าใหม่ลงในฐานข้อมูลก่อน เพื่อให้ได้ p_id
+    $sql_insert = "INSERT INTO `product` (`p_name`, `p_detail`, `p_price`, `pt_id`) 
+                   VALUES (
+                       '{$_POST['pname']}', 
+                       '{$_POST['pdetail']}', 
+                       '{$_POST['pprice']}', 
+                       '{$_POST['pt']}'
+                   );";
 
-        // เริ่มต้นตัวแปรสำหรับการอัปโหลดไฟล์
-        $uploads = [];
-        for ($i = 1; $i <= 4; $i++) {
-            if (isset($_FILES["pimg$i"]) && $_FILES["pimg$i"]['error'] == 0) {
-                // เช็คไฟล์และอัปโหลด
-                $uploads[$i] = 'uploads/' . basename($_FILES["pimg$i"]["name"]);
-                move_uploaded_file($_FILES["pimg$i"]["tmp_name"], $uploads[$i]);
-            } else {
-                $uploads[$i] = null; // หากไม่มีไฟล์ให้เซ็ตเป็น null
+    if (mysqli_query($conn, $sql_insert)) {
+        // รับ p_id ที่เพิ่งถูกสร้างใหม่
+        $p_id = mysqli_insert_id($conn);
+
+        // ตรวจสอบว่ามีไฟล์รูปภาพใหม่ที่อัปโหลดหรือไม่ และกำหนดชื่อไฟล์ตาม p_id
+        if ($_FILES['pimg1']['name'] != "") {
+            $allowed = array('gif', 'png', 'jpg', 'jpeg', 'jfif');
+            $filename = $_FILES['pimg1']['name'];
+            $picture_ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+            if (!in_array($picture_ext, $allowed)) {
+                echo "<script>alert('เพิ่มสินค้าล้มเหลว! ไฟล์รูปต้องเป็น jgif, png, jpg, jpeg, jfif เท่านั้น');</script>";
+                exit;
             }
+            $new_picture1 = $p_id . ".1." . $picture_ext; // ตั้งชื่อไฟล์เป็น p_id.1
+            copy($_FILES['pimg1']['tmp_name'], "images/" . $new_picture1);
         }
 
-        // เตรียมคำสั่ง SQL
-        $sql = "INSERT INTO products (p_name, p_detail, p_price, pt_id, p_img1, p_img2, p_img3, p_img4) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        
-        // เตรียม statement
-        $stmt = mysqli_prepare($conn, $sql);
-        
-        // ผูกตัวแปร
-        mysqli_stmt_bind_param($stmt, "ssissssss", $pname, $pdetail, $pprice, $pt, $uploads[1], $uploads[2], $uploads[3], $uploads[4]);
+        if ($_FILES['pimg2']['name'] != "") {
+            $allowed = array('gif', 'png', 'jpg', 'jpeg', 'jfif');
+            $filename = $_FILES['pimg2']['name'];
+            $picture_ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+            if (!in_array($picture_ext, $allowed)) {
+                echo "<script>alert('เพิ่มสินค้าล้มเหลว! ไฟล์รูปต้องเป็น jgif, png, jpg, jpeg, jfif เท่านั้น');</script>";
+                exit;
+            }
+            $new_picture2 = $p_id . ".2." . $picture_ext; // ตั้งชื่อไฟล์เป็น p_id.2
+            copy($_FILES['pimg2']['tmp_name'], "images/" . $new_picture2);
+        }
 
-        // ตรวจสอบว่าคิวรีสำเร็จหรือไม่
-        if (mysqli_stmt_execute($stmt)) {
-            echo "<script>alert('เพิ่มสินค้าสำเร็จ'); window.location='your_success_page.php';</script>";
+        if ($_FILES['pimg3']['name'] != "") {
+            $allowed = array('gif', 'png', 'jpg', 'jpeg', 'jfif');
+            $filename = $_FILES['pimg3']['name'];
+            $picture_ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+            if (!in_array($picture_ext, $allowed)) {
+                 echo "<script>alert('เพิ่มสินค้าล้มเหลว! ไฟล์รูปต้องเป็น jgif, png, jpg, jpeg, jfif เท่านั้น');</script>";
+                exit;
+            }
+            $new_picture3 = $p_id . ".3." . $picture_ext; // ตั้งชื่อไฟล์เป็น p_id.3
+            copy($_FILES['pimg3']['tmp_name'], "images/" . $new_picture3);
+        }
+
+        if ($_FILES['pimg4']['name'] != "") {
+            $allowed = array('gif', 'png', 'jpg', 'jpeg', 'jfif');
+            $filename = $_FILES['pimg4']['name'];
+            $picture_ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+            if (!in_array($picture_ext, $allowed)) {
+                echo "<script>alert('เพิ่มสินค้าล้มเหลว! ไฟล์รูปต้องเป็น jgif, png, jpg, jpeg, jfif เท่านั้น');</script>";
+                exit;
+            }
+            $new_picture4 = $p_id . ".4." . $picture_ext; // ตั้งชื่อไฟล์เป็น p_id.4
+            copy($_FILES['pimg4']['tmp_name'], "images/" . $new_picture4);
+        }
+
+        // สร้าง SQL สำหรับอัปเดตชื่อไฟล์ในฐานข้อมูล
+        $sql_update = "UPDATE `product` SET 
+                            `p_picture1`='{$new_picture1}', 
+                            `p_picture2`='{$new_picture2}', 
+                            `p_picture3`='{$new_picture3}', 
+                            `p_picture4`='{$new_picture4}' 
+                        WHERE `p_id`='{$p_id}';";
+
+        // ทำการอัปเดตชื่อไฟล์ในฐานข้อมูล
+        if (mysqli_query($conn, $sql_update)) {
+            echo "<script>alert('เพิ่มสินค้าสำเร็จ'); window.location='a-product.php';</script>";
         } else {
-            echo "<script>alert('เกิดข้อผิดพลาด: " . mysqli_stmt_error($stmt) . "');</script>";
+            echo "<script>alert('เพิ่มสินค้าล้มเหลว');</script>";
         }
 
-        // ปิด statement
-        mysqli_stmt_close($stmt);
     } else {
-        echo "<script>alert('กรุณากรอกข้อมูลให้ครบถ้วน');</script>";
+        echo "<script>alert('เพิ่มสินค้าล้มเหลว');</script>";
     }
 }
-
-// ปิดการเชื่อมต่อฐานข้อมูล
-mysqli_close($conn);
 ?>
+
+
+
 
 </body>
 </html>
