@@ -1,102 +1,90 @@
-<?php include_once("connectdb.php"); ?>
-
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="th">
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ฟอร์มสมัครสมาชิก</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
-    <meta charset="utf-8">
-    <title>สมัครสมาชิก</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
     <style>
-        body, h1, label, input, button {
+        .f1 {
             font-family: "Itim", cursive;
             font-weight: 500;
         }
+        .form-signin {
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
-<body>
-    <center><h1>สมัครสมาชิก</h1></center>
 
-    <form class="form-horizontal" method="post" action="">
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="cfullname">ชื่อ-นามสกุล</label>
-            <div class="col-md-4">
-                <input id="cfullname" name="cfullname" type="text" class="form-control input-md" required autofocus><br>
-            </div>
-        </div>
+<body class="d-flex align-items-center justify-content-center vh-100 bg-body-tertiary position-relative">
+    <a href="index.php" class="btn position-absolute top-0 end-0 m-2">
+        <i class="bi bi-x-circle-fill" style="font-size: 2rem;"></i>
+    </a>
+    <div class="container text-center">
+        <main class="form-signin w-50 m-auto">
+            <form method="POST" action="">
+                <img class="mb-3" src="images/Logo.png" alt="" width="50%" height="50%">
+                <hr>
+                <h1 class="h5 mb-3 fw-normal"><span class="f1">สมัครสมาชิก</span></h1>
+                <hr>
+                <div class="form-floating mb-2">
+                    <input type="text" class="form-control" name="cfullname" id="floatinName" placeholder="Name" required>
+                    <label for="floatinName"><span class="f1">ชื่อ-สกุล</span></label>
+                </div>
 
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="caddress">ที่อยู่</label>
-            <div class="col-md-4">
-                <textarea id="caddress" name="caddress" class="form-control" required></textarea><br>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="cphonnumber">เบอร์โทรศัพท์</label>
-            <div class="col-md-4">
-                <input id="cphonnumber" name="cphonnumber" type="text" class="form-control input-md" required><br>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="cemail">อีเมล</label>
-            <div class="col-md-4">
-                <input id="cemail" name="cemail" type="email" class="form-control input-md" required><br>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="cpassword">รหัสผ่าน</label>
-            <div class="col-md-4">
-                <input id="cpassword" name="cpassword" type="password" class="form-control input-md" required><br>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-4 col-md-offset-4">
-                <button type="submit" name="Submit" class="btn btn-success">สมัครสมาชิก</button>
-            </div>
-        </div>
-    </form>
+                <div class="form-floating mb-2">
+                    <input type="text" class="form-control" name="caddress" id="floatinAddress" placeholder="ที่อยู่" required>
+                    <label for="floatinAddress"><span class="f1">ที่อยู่</span></label>
+                </div>
+                    
+                <div class="form-floating mb-2">
+                    <input type="tel" class="form-control" name="cphonnumber" id="floatinPhoneNum" placeholder="เบอร์โทร" required>
+                    <label for="floatinPhoneNum"><span class="f1">เบอร์โทร</span></label>
+                </div>
+                <div class="form-floating mb-2">
+                    <input type="email" class="form-control" name="cemail" id="floatingInput" placeholder="name@example.com" required>
+                    <label for="floatingInput"><span class="f1">Email address</span></label>
+                </div>
+                    
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" name="cpassword" id="floatingPassword" placeholder="Password" required>
+                    <label for="floatingPassword"><span class="f1">Password</span></label>
+                </div>
+               
+                <button class="btn btn-primary w-100 py-2" type="submit"><span class="f1">สมัครสมาชิก</span></button>
+            </form><br>
+        </main>
+    </div>
 
     <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // ตรวจสอบว่าข้อมูลฟอร์มมีการส่งมาหรือไม่
-        if (isset($_POST['cfullname'], $_POST['caddress'], $_POST['cphonnumber'], $_POST['cemail'], $_POST['cpassword'])) {
-            // เก็บข้อมูลที่ส่งมาจากฟอร์ม
-            $cfullname = $_POST['cfullname'];
-            $caddress = $_POST['caddress'];
-            $cphonnumber = $_POST['cphonnumber'];
-            $cemail = $_POST['cemail'];
-            $cpassword = password_hash($_POST['cpassword'], PASSWORD_BCRYPT); // เข้ารหัสรหัสผ่านด้วย bcrypt
-
-            // เตรียมคำสั่ง SQL
-            $sql = "INSERT INTO member (c_fullname, c_address1, c_phonnumber, c_email, c_password) 
-                    VALUES (?, ?, ?, ?, ?)";
-            
-            // เตรียม statement
-            $stmt = mysqli_prepare($conn, $sql);
-
-            // ผูกตัวแปร
-            mysqli_stmt_bind_param($stmt, "sssss", $cfullname, $caddress, $cphonnumber, $cemail, $cpassword);
-
-            // ตรวจสอบว่าคำสั่งสำเร็จหรือไม่
-            if (mysqli_stmt_execute($stmt)) {
-                echo "<script>alert('สมัครสมาชิกเรียบร้อยแล้ว'); window.location='login_page.php';</script>";
+        include_once("connectdb.php");
+    
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // ทำการเข้ารหัสรหัสผ่าน
+            $cpassword = password_hash($_POST['cpassword'], PASSWORD_BCRYPT);
+    
+            // เตรียมคิวรี
+            $sqli = "INSERT INTO member (c_fullname, c_address1, c_phonnumber, c_email, c_password) 
+                     VALUES ('{$_POST['cfullname']}', '{$_POST['caddress']}', '{$_POST['cphonnumber']}', '{$_POST['cemail']}', '$cpassword')";
+    
+            // ตรวจสอบว่าคิวรีสำเร็จหรือไม่
+            if (mysqli_query($conn, $sqli)) {
+                echo "<script>alert('ยินดีต้อนรับสู่ร้านเขียนฝัน Please sign in'); window.location='c-sign-in.php';</script>";
             } else {
-                echo "<script>alert('เกิดข้อผิดพลาด: " . mysqli_stmt_error($stmt) . "');</script>";
+                echo "<script>alert('เกิดข้อผิดพลาด: " . mysqli_error($conn) . "');</script>";
             }
-
-            // ปิด statement
-            mysqli_stmt_close($stmt);
-        } else {
-            echo "<script>alert('กรุณากรอกข้อมูลให้ครบถ้วน');</script>";
         }
-
-        // ปิดการเชื่อมต่อฐานข้อมูล
+    
         mysqli_close($conn);
-    }
     ?>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
