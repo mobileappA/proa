@@ -137,25 +137,25 @@ if (isset($_POST['Submit'])) {
         $selected_address = $data['c_address3'];
     }
 
-    // แทรกข้อมูลการสั่งซื้อในตาราง orders โดยไม่ใส่ค่าใน oid
-    $sql = "INSERT INTO `orders` (net_total, order_date, cid, address, status) 
-            VALUES ('$net_total', CURRENT_TIMESTAMP, '{$_SESSION['cid']}', '$selected_address', 'สั่งซื้อสินค้าสำเร็จ');";
+    echo "Selected Address: " . $selected_address;
 
-    // รันคำสั่ง SQL
-    mysqli_query($conn, $sql) or die(mysqli_error($conn));
+	$sql = "insert into `orders` values('$net_total', CURRENT_TIMESTAMP, '{$_SESSION['cid']}','$selected_address','สั่งซื้อสินค้าสำเร็จ');" ;
+
+// รันคำสั่ง SQL
+mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
     // Get last inserted order id
     $id = mysqli_insert_id($conn);
 
-    // เพิ่มข้อมูลในตาราง orders_detail
-    foreach ($_SESSION['sid'] as $key => $pid) {
-        $sql2 = "INSERT INTO orders_detail (oid, pid, quantity) 
-                 VALUES ('$id', '{$_SESSION['sid'][$key]}', '{$_SESSION['sitem'][$key]}');";
-        mysqli_query($conn, $sql2) or die(mysqli_error($conn));
+ foreach($_SESSION['sid'] as $pid) {
+		$sql2 = "insert into orders_detail values('$id', '".$_SESSION['sid'][$pid]."', '".$_SESSION['sitem'][$pid]."');" ;
+		mysqli_query($conn, $sql2);
+		
     }
 
     echo "<meta http-equiv=\"refresh\" content=\"0;URL=clear.php\">";
 }
+?>
 ?>
 
 </body>
