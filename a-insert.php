@@ -1,5 +1,7 @@
 <?php  include_once("r-checklogin.php");
- include_once("connectdb.php");?>
+include_once("connectdb.php");
+?>
+
 
 <!doctype html>
 <html>
@@ -18,7 +20,7 @@
 <body>
 <center> <h1>เขียนฝัน- เพิ่มสินค้า </h1> </center>
 
-<form class="form-horizontal" method="POST" action="" enctype="multipart/form-data">
+<form class="form-horizontal" method="post" action="" enctype="multipart/form-data">
     <fieldset>
         <div class="form-group">
             <label class="col-md-4 control-label" for="textinput">ชื่อสินค้า</label>
@@ -80,13 +82,13 @@
                 <?php } ?>
             </select>
             <br><br>
-            <button type="submit"  class="btn btn-success center-block">เพิ่ม</button>
+            <button type="submit" name="Submit" class="btn btn-success center-block">เพิ่ม</button>
         </div>
     </fieldset>
 </form>
 <hr>
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if (isset($_POST['Submit'])) {
     // กำหนดตัวแปรสำหรับชื่อไฟล์ใหม่
     $new_picture1 = '';
     $new_picture2 = '';
@@ -116,7 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 exit;
             }
             $new_picture1 = $p_id . ".1." . $picture_ext; // ตั้งชื่อไฟล์เป็น p_id.1
-            copy($_FILES['pimg1']['tmp_name'], "images/" . $new_picture1);
+            move_uploaded_file($_FILES['pimg1']['tmp_name'], "images/" . $new_picture1);
         }
 
         if ($_FILES['pimg2']['name'] != "") {
@@ -128,7 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 exit;
             }
             $new_picture2 = $p_id . ".2." . $picture_ext; // ตั้งชื่อไฟล์เป็น p_id.2
-            copy($_FILES['pimg2']['tmp_name'], "images/" . $new_picture2);
+            move_uploaded_file($_FILES['pimg2']['tmp_name'], "images/" . $new_picture2);
         }
 
         if ($_FILES['pimg3']['name'] != "") {
@@ -140,7 +142,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 exit;
             }
             $new_picture3 = $p_id . ".3." . $picture_ext; // ตั้งชื่อไฟล์เป็น p_id.3
-            copy($_FILES['pimg3']['tmp_name'], "images/" . $new_picture3);
+            move_uploaded_file($_FILES['pimg3']['tmp_name'], "images/" . $new_picture3);
         }
 
         if ($_FILES['pimg4']['name'] != "") {
@@ -152,7 +154,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 exit;
             }
             $new_picture4 = $p_id . ".4." . $picture_ext; // ตั้งชื่อไฟล์เป็น p_id.4
-            copy($_FILES['pimg4']['tmp_name'], "images/" . $new_picture4);
+            move_uploaded_file($_FILES['pimg4']['tmp_name'], "images/" . $new_picture4);
         }
 
         // สร้าง SQL สำหรับอัปเดตชื่อไฟล์ในฐานข้อมูล
