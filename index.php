@@ -7,7 +7,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>ร้านเขียนฝัน A</title>
+    <title>ร้านเขียนฝัน</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
@@ -55,7 +55,7 @@
         <div class="container">
             <a class="navbar-brand d-flex justify-content-between align-items-center order-lg-0" href="index.php">
                 <img src="images/Logo.png" alt="site icon" style="width: 40px; height: 40px;">
-                <span class="f1" style="margin-left: 20px;">เขียนฝันAA</span>
+                <span class="f1" style="margin-left: 20px;">เขียนฝัน</span>
             </a>
 
             <div class="order-lg-2 nav-btns d-flex align-items-center ms-auto">
