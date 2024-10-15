@@ -67,7 +67,7 @@ if (isset($_POST['Submit'])) {
         $new_filename = "type".$pt_id ."." . $picture_ext;
 
         // ย้ายไฟล์รูปไปยังโฟลเดอร์ images ด้วยชื่อที่ตรงกับ p_id
-        if (copy($_FILES['pimg']['tmp_name'], "images/" . $new_filename)) {
+        if (move_uploaded_file($_FILES['pimg']['tmp_name'], "images/" . $new_filename)) {
             // หากการอัปโหลดไฟล์สำเร็จ ทำการอัปเดตข้อมูลในฐานข้อมูล
             $sql = "UPDATE `product_type` SET `pt_name`='{$_POST['ptname']}', `t_picture`='{$new_filename}' WHERE `pt_id`='{$pt_id}'"; // แก้ไขคำสั่ง SQL
         } else {
