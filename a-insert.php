@@ -20,80 +20,64 @@ include_once("connectdb.php");
 <body>
 <center> <h1>เขียนฝัน- เพิ่มสินค้า </h1> </center>
 
-<form class="form-horizontal" method="post" action="" enctype="multipart/form-data">
+<form class="form-horizontal f1" method="post" action="" enctype="multipart/form-data">
     <fieldset>
         <div class="form-group">
-            <label class="col-md-4 control-label" for="textinput">ชื่อสินค้า</label>
+            <label class="col-md-4 control-label f1" for="textinput">ชื่อสินค้า</label>
             <div class="col-md-4">
-                <input id="textinput" name="pname" type="text" class="form-control input-md" required autofocus><br>
+                <input type="text" name="pname" style="width: 300px" required autofocus value="<?= htmlspecialchars($data1['p_name']); ?>"><br>
             </div>
         </div>
 
         <div class="form-group">
-            <label class="col-md-4 control-label" for="textarea">รายละเอียดสินค้า</label>
+            <label class="col-md-4 control-label f1" for="textarea">รายละเอียดสินค้า</label>
             <div class="col-md-4">
-                <textarea class="form-control" id="textarea" name="pdetail"></textarea><br>
+                <textarea name="pdetail" rows="5" cols="50" required></textarea><br>
             </div>
         </div>
 
         <div class="form-group">
-            <label class="col-md-4 control-label" for="number">ราคา</label>
+            <label class="col-md-4 control-label f1" for="number">ราคา</label>
             <div class="col-md-4">
-                <input id="textinput" name="pprice" type="number" style="width: 200px;" class="form-control input-md" required>
+                <input type="number" name="pprice" required value="" style="width: 200px;" step="0.01" min="0"><br>
             </div>
         </div>
-        <br>
+
+        <!-- ฟอร์มอัปโหลดรูปภาพค้าบบบ ทำให้มันลูปสร้าง 4 รอบ-->
+        <?php for ($i = 1; $i <= 4; $i++) { ?>
+        <div class="form-group">
+            <label class="col-md-4 control-label f1" for="file">รูปภาพที่ <?= $i ?></label>
+            <div class="col-md-4">
+                <input class="form-control" name="pimg<?= $i ?>" type="file">
+                <input type="hidden" name="ppicture<?= $i ?>" value="<?= htmlspecialchars($data1["p_picture$i"]); ?>">
+            </div>
+        </div>
+        <?php } ?>
         
         <div class="form-group">
-            <label class="col-md-4 control-label" for="pimg1">รูปภาพ 1</label>
+            <label class="col-md-4 control-label f1" for="pt">ประเภทสินค้า</label>
             <div class="col-md-4">
-                <input class="form-control" name="pimg1" type="file" required>
+                <select name="pt" class="form-select f1">
+                    <?php
+                    $sql2 = "SELECT * FROM product_type ORDER BY pt_name ASC";
+                    $rs2 = mysqli_query($conn, $sql2);
+                    while ($data2 = mysqli_fetch_array($rs2)) {
+                    ?>
+                        <option value="<?= htmlspecialchars($data2['pt_id']); ?>" <?=($data1['pt_id'] == $data2['pt_id']) ? "selected" : "";?> >
+                            <?= htmlspecialchars($data2['pt_name']); ?>
+                        </option>
+                    <?php } ?>
+                </select>
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="pimg2">รูปภาพ 2</label>
-            <div class="col-md-4">
-                <input class="form-control" name="pimg2" type="file">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="pimg3">รูปภาพ 3</label>
-            <div class="col-md-4">
-                <input class="form-control" name="pimg3" type="file">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="pimg4">รูปภาพ 4</label>
-            <div class="col-md-4">
-                <input class="form-control" name="pimg4" type="file">
-            </div>
-        </div>
-        
-        <div class="mb-3">
-            <label class="col-md-4 control-label" for="ptname">ประเภทสินค้า</label>
-            <select name="pt" id="pt" class="form-select">
-                <?php
-               
-                $sql2 = "SELECT * FROM product_type ORDER BY pt_name ASC ";
-                $rs2 = mysqli_query($conn, $sql2);
-                while ($data2 = mysqli_fetch_array($rs2)) {
-                ?>
-                    <option value="<?=$data2['pt_id'];?>"><?=$data2['pt_name'];?></option>
-                <?php } ?>
-            </select>
-            <br><br>
-            <button type="submit"  class="btn btn-success center-block">เพิ่ม</button>
-        </div>
+        <br><br>
+        <button type="submit" name="Submit" class="btn btn-success center-block f1">บันทึก</button>
     </fieldset>
 </form>
 <hr>
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // กำหนดตัวแปรสำหรับชื่อไฟล์ใหม่
-    $new_picture1 = '';
-    $new_picture2 = '';
-    $new_picture3 = '';
-    $new_picture4 = '';
+if (isset($_POST['Submit'])) {
+
 
     // สร้าง SQL สำหรับเพิ่มข้อมูลสินค้าใหม่ลงในฐานข้อมูลก่อน เพื่อให้ได้ p_id
     $sql_insert = "INSERT INTO `product` (`p_name`, `p_detail`, `p_price`, `pt_id`) 
@@ -107,62 +91,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (mysqli_query($conn, $sql_insert)) {
         // รับ p_id ที่เพิ่งถูกสร้างใหม่
         $p_id = mysqli_insert_id($conn);
-
-        // ตรวจสอบว่ามีไฟล์รูปภาพใหม่ที่อัปโหลดหรือไม่ และกำหนดชื่อไฟล์ตาม p_id
-        if ($_FILES['pimg1']['name'] != "") {
-            $allowed = array('gif', 'png', 'jpg', 'jpeg', 'jfif');
-            $filename = $_FILES['pimg1']['name'];
-            $picture_ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
-            if (!in_array($picture_ext, $allowed)) {
-                echo "<script>alert('เพิ่มสินค้าล้มเหลว! ไฟล์รูปต้องเป็น jgif, png, jpg, jpeg, jfif เท่านั้น');</script>";
-                exit;
+            $new_pictures = array();
+            for ($i = 1; $i <= 4; $i++) {
+                $new_pictures[$i] = $_POST["ppicture$i"];
+                if ($_FILES["pimg$i"]['name'] != "") {
+                    $allowed = array('gif', 'png', 'jpg', 'jpeg', 'jfif');
+                    $filename = $_FILES["pimg$i"]['name'];
+                    $picture_ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+                    if (!in_array($picture_ext, $allowed)) {
+                        echo "<script>alert('แก้ไขข้อมูลไม่สำเร็จ! ไฟล์ต้องเป็น jpg, gif หรือ png เท่านั้น');</script>";
+                        exit;
+                    }
+                    $new_pictures[$i] = $p_id . ".$i." . $picture_ext;
+                    move_uploaded_file($_FILES["pimg$i"]['tmp_name'], "images/" . $new_pictures[$i]);
+                }
             }
-            $new_picture1 = $p_id . ".1." . $picture_ext; // ตั้งชื่อไฟล์เป็น p_id.1
-            move_uploaded_file($_FILES['pimg1']['tmp_name'], "images/" . $new_picture1);
-        }
-
-        if ($_FILES['pimg2']['name'] != "") {
-            $allowed = array('gif', 'png', 'jpg', 'jpeg', 'jfif');
-            $filename = $_FILES['pimg2']['name'];
-            $picture_ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
-            if (!in_array($picture_ext, $allowed)) {
-                echo "<script>alert('เพิ่มสินค้าล้มเหลว! ไฟล์รูปต้องเป็น jgif, png, jpg, jpeg, jfif เท่านั้น');</script>";
-                exit;
-            }
-            $new_picture2 = $p_id . ".2." . $picture_ext; // ตั้งชื่อไฟล์เป็น p_id.2
-            move_uploaded_file($_FILES['pimg2']['tmp_name'], "images/" . $new_picture2);
-        }
-
-        if ($_FILES['pimg3']['name'] != "") {
-            $allowed = array('gif', 'png', 'jpg', 'jpeg', 'jfif');
-            $filename = $_FILES['pimg3']['name'];
-            $picture_ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
-            if (!in_array($picture_ext, $allowed)) {
-                 echo "<script>alert('เพิ่มสินค้าล้มเหลว! ไฟล์รูปต้องเป็น jgif, png, jpg, jpeg, jfif เท่านั้น');</script>";
-                exit;
-            }
-            $new_picture3 = $p_id . ".3." . $picture_ext; // ตั้งชื่อไฟล์เป็น p_id.3
-            move_uploaded_file($_FILES['pimg3']['tmp_name'], "images/" . $new_picture3);
-        }
-
-        if ($_FILES['pimg4']['name'] != "") {
-            $allowed = array('gif', 'png', 'jpg', 'jpeg', 'jfif');
-            $filename = $_FILES['pimg4']['name'];
-            $picture_ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
-            if (!in_array($picture_ext, $allowed)) {
-                echo "<script>alert('เพิ่มสินค้าล้มเหลว! ไฟล์รูปต้องเป็น jgif, png, jpg, jpeg, jfif เท่านั้น');</script>";
-                exit;
-            }
-            $new_picture4 = $p_id . ".4." . $picture_ext; // ตั้งชื่อไฟล์เป็น p_id.4
-            move_uploaded_file($_FILES['pimg4']['tmp_name'], "images/" . $new_picture4);
         }
 
         // สร้าง SQL สำหรับอัปเดตชื่อไฟล์ในฐานข้อมูล
         $sql_update = "UPDATE `product` SET 
-                            `p_picture1`='{$new_picture1}', 
-                            `p_picture2`='{$new_picture2}', 
-                            `p_picture3`='{$new_picture3}', 
-                            `p_picture4`='{$new_picture4}' 
+                            `p_picture1`='{$new_picture[1]}', 
+                            `p_picture2`='{$new_picture[2]}', 
+                            `p_picture3`='{$new_picture[3]}', 
+                            `p_picture4`='{$new_picture[4]}' 
                         WHERE `p_id`='{$p_id}';";
 
         // ทำการอัปเดตชื่อไฟล์ในฐานข้อมูล
@@ -175,7 +126,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "<script>alert('เพิ่มสินค้าล้มเหลว');</script>";
     }
-}
+
 ?>
 
 
