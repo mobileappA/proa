@@ -83,6 +83,7 @@ if (isset($_POST['Submit'])) {
         $picture_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION)); // ดึงนามสกุลไฟล์
         $allowed_picture = array('jpg', 'jpeg', 'png', 'gif'); // ชนิดไฟล์ที่อนุญาต
 
+        // ตรวจสอบชนิดของไฟล์
         if (in_array($picture_ext, $allowed_picture)) {
             // ตรวจสอบขนาดไฟล์ (ไม่เกิน 2MB)
             if ($_FILES['pimg']['size'] <= 2 * 1024 * 1024) {
@@ -104,11 +105,11 @@ if (isset($_POST['Submit'])) {
                     $idauto = $stmt->insert_id;
 
                     // ตั้งชื่อไฟล์ใหม่ให้ตรงกับ pt_id ที่ได้
-                    $new_filename = "type" . $idauto . "." . $picture_ext; // ชื่อที่ต้องการบันทึก
-                    $destination_path = "images/" . $new_filename; // เส้นทางที่จะบันทึกรูปภาพ
+                    $new_filename = "images/"."type" . $idauto . "." . $picture_ext;
+                    $new_filename_in_db = "type" . $idauto . "." . $picture_ext; // ชื่อที่จะบันทึกลงฐานข้อมูล
 
                     // ย้ายไฟล์ไปยังโฟลเดอร์เก็บภาพ
-                    if (move_uploaded_file($file_tmp, $destination_path)) {
+                    if (move_uploaded_file($file_tmp, $new_filename)) {
                         // อัปเดตชื่อไฟล์ในฐานข้อมูลหลังจากย้ายไฟล์สำเร็จ
                         $stmt_update = $conn->prepare("UPDATE product_type SET t_picture = ? WHERE pt_id = ?");
                         if (!$stmt_update) {
@@ -116,11 +117,9 @@ if (isset($_POST['Submit'])) {
                         }
 
                         // ผูกค่ากับพารามิเตอร์สำหรับการอัปเดต
-                        $stmt_update->bind_param("si", $new_filename, $idauto);
+                        $stmt_update->bind_param("si", $new_filename_in_db, $idauto);
                         $stmt_update->execute();
                         $stmt_update->close();
-                    } else {
-                        echo "<script>alert('เกิดข้อผิดพลาดในการอัปโหลดไฟล์');</script>";
                     }
 
                     echo "<script>alert('เพิ่มข้อมูลสินค้าสำเร็จ'); window.location='a-type.php';</script>";
