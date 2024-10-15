@@ -64,7 +64,7 @@ echo ($_SESSION['aname']);
         <div class="mb-3-center">
             <div class="name-center">
                 <label class="col-md-4 control-label f1" for="formFileMultiple">รูปภาพ</label>
-                <input class="form-control f1" name="pimg" type="file" id="formFileMultiple" multiple style="width: 300px;">
+                <input class="form-control f1" name="pimg" type="file" id="formFileMultiple" style="width: 300px;">
             </div>
         </div>
         <br>
@@ -76,66 +76,58 @@ echo ($_SESSION['aname']);
 
 <?php
 if (isset($_POST['Submit'])) {
-    // ตรวจสอบว่ามีไฟล์ที่อัปโหลดหรือไม่
-    if (isset($_FILES['pimg']) && $_FILES['pimg']['error'] === UPLOAD_ERR_OK) {
-        $file_name = $_FILES['pimg']['name'];
-        $file_tmp = $_FILES['pimg']['tmp_name'];
-        $picture_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION)); // ดึงนามสกุลไฟล์
-        $allowed_picture = array('jpg', 'jpeg', 'png', 'gif'); // ชนิดไฟล์ที่อนุญาต
+    // รับข้อมูลจากฟอร์ม
+    $ptname = $_POST['ptname'];
 
-        // ตรวจสอบชนิดของไฟล์
-        if (in_array($picture_ext, $allowed_picture)) {
-            // ตรวจสอบขนาดไฟล์ (ไม่เกิน 2MB)
-            if ($_FILES['pimg']['size'] <= 2 * 1024 * 1024) {
-                // เก็บข้อมูลจากฟอร์ม
-                $ptname = $_POST['ptname'];
+    // สร้าง SQL สำหรับเพิ่มข้อมูลสินค้าใหม่ลงในฐานข้อมูล
+    $sql_insert = "INSERT INTO product_type (pt_name) VALUES (?)";
+    $stmt = $conn->prepare($sql_insert);
+    $stmt->bind_param("s", $ptname);
 
-                // เตรียมคำสั่ง SQL สำหรับเพิ่มประเภทสินค้าใหม่
-                $stmt = $conn->prepare("INSERT INTO product_type (pt_name) VALUES (?)");
-                if (!$stmt) {
-                    die("เตรียมคำสั่งล้มเหลว: " . $conn->error);
-                }
+    if ($stmt->execute()) {
+        // รับ pt_id ของข้อมูลที่เพิ่งถูกเพิ่ม
+        $pt_id = $stmt->insert_id;
 
-                // ผูกค่าตัวแปร
-                $stmt->bind_param("s", $ptname);
+        // ตรวจสอบว่ามีไฟล์ที่อัปโหลดหรือไม่
+        if ($_FILES['pimg']['name'] != "") {
+            $allowed = array('gif', 'png', 'jpg', 'jpeg', 'jfif');
+            $filename = $_FILES['pimg']['name'];
+            $picture_ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
 
-                // ทำการ execute
-                if ($stmt->execute()) {
-                    // รับ ID ประเภทสินค้าที่เพิ่งเพิ่ม
-                    $idauto = $stmt->insert_id;
+            // ตรวจสอบชนิดของไฟล์
+            if (!in_array($picture_ext, $allowed)) {
+                echo "<script>alert('แก้ไขข้อมูลสินค้าไม่สำเร็จ! ไฟล์รูปต้องเป็น jpg, gif หรือ png เท่านั้น');</script>";
+            } else {
+                // ตั้งชื่อไฟล์ใหม่โดยใช้ pt_id
+                $new_filename = "type" . $pt_id . "." . $picture_ext;
+                $destination_path = "images/" . $new_filename;
 
-                    // ตั้งชื่อไฟล์ใหม่ให้ตรงกับ pt_id ที่ได้
-                    $new_filename = "images/"."type" . $idauto . "." . $picture_ext;
-                    $new_filename_in_db = "type" . $idauto . "." . $picture_ext; // ชื่อที่จะบันทึกลงฐานข้อมูล
+                // ย้ายไฟล์ไปยังโฟลเดอร์เก็บภาพ
+                if (move_uploaded_file($_FILES['pimg']['tmp_name'], $destination_path)) {
+                    // อัปเดตชื่อไฟล์ในฐานข้อมูล
+                    $sql_update = "UPDATE product_type SET t_picture = ? WHERE pt_id = ?";
+                    $stmt_update = $conn->prepare($sql_update);
+                    $stmt_update->bind_param("si", $new_filename, $pt_id);
 
-                    // ย้ายไฟล์ไปยังโฟลเดอร์เก็บภาพ
-                    if (move_uploaded_file($file_tmp, $new_filename)) {
-                        // อัปเดตชื่อไฟล์ในฐานข้อมูลหลังจากย้ายไฟล์สำเร็จ
-                        $stmt_update = $conn->prepare("UPDATE product_type SET t_picture = ? WHERE pt_id = ?");
-                        if (!$stmt_update) {
-                            die("เตรียมคำสั่งอัปเดตล้มเหลว: " . $conn->error);
-                        }
-
-                        // ผูกค่ากับพารามิเตอร์สำหรับการอัปเดต
-                        $stmt_update->bind_param("si", $new_filename_in_db, $idauto);
-                        $stmt_update->execute();
-                        $stmt_update->close();
+                    if ($stmt_update->execute()) {
+                        echo "<script>alert('เพิ่มข้อมูลสินค้าสำเร็จ'); window.location='a-type.php';</script>";
+                    } else {
+                        echo "<script>alert('เกิดข้อผิดพลาดในการบันทึกข้อมูลในฐานข้อมูล');</script>";
                     }
 
-                    echo "<script>alert('เพิ่มข้อมูลสินค้าสำเร็จ'); window.location='a-type.php';</script>";
+                    $stmt_update->close();
                 } else {
-                    echo "<script>alert('เพิ่มข้อมูลสินค้าไม่สำเร็จ');</script>";
+                    echo "<script>alert('เกิดข้อผิดพลาดในการอัปโหลดรูปภาพ');</script>";
                 }
-                $stmt->close();
-            } else {
-                echo "<script>alert('ขนาดไฟล์ใหญ่เกินไป');</script>";
             }
         } else {
-            echo "<script>alert('ชนิดไฟล์ไม่ถูกต้อง');</script>";
+            echo "<script>alert('เพิ่มข้อมูลสินค้าสำเร็จ'); window.location='a-type.php';</script>";
         }
     } else {
-        echo "<script>alert('เกิดข้อผิดพลาดในการอัปโหลดไฟล์');</script>";
+        echo "<script>alert('เพิ่มข้อมูลสินค้าไม่สำเร็จ');</script>";
     }
+
+    $stmt->close();
 }
 
 mysqli_close($conn);
