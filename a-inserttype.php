@@ -1,4 +1,4 @@
-<?php
+<?php  
 include_once("r-checklogin.php");
 include_once("connectdb.php");
 
@@ -10,9 +10,6 @@ echo ($_SESSION['aname']);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <meta charset="utf-8">
     <title>ร้านเขียนฝัน</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
     <style>
         .f1 {
@@ -61,9 +58,9 @@ echo ($_SESSION['aname']);
             </div>
         </div>
 
-        <div class="mb-3-center">
-            <div class="name-center">
-                <label class="col-md-4 control-label f1" for="formFileMultiple">รูปภาพ</label>
+        <div class="form-group">
+            <label class="col-md-4 control-label f1" for="formFileMultiple">รูปภาพ</label>
+            <div class="col-md-4">
                 <input class="form-control f1" name="pimg" type="file" id="formFileMultiple" style="width: 300px;">
             </div>
         </div>
@@ -76,55 +73,47 @@ echo ($_SESSION['aname']);
 
 <?php
 if (isset($_POST['Submit'])) {
-    // รับข้อมูลจากฟอร์ม
     $ptname = $_POST['ptname'];
-
-    // สร้าง SQL สำหรับเพิ่มข้อมูลสินค้าใหม่ลงในฐานข้อมูล
     $sql_insert = "INSERT INTO product_type (pt_name) VALUES (?)";
     $stmt = $conn->prepare($sql_insert);
     $stmt->bind_param("s", $ptname);
 
     if ($stmt->execute()) {
-        // รับ pt_id ของข้อมูลที่เพิ่งถูกเพิ่ม
-        $pt_id = $stmt->insert_id;
-
-        // ตรวจสอบว่ามีไฟล์ที่อัปโหลดหรือไม่
-        if ($_FILES['pimg']['name'] != "") {
-            $allowed = array('gif', 'png', 'jpg', 'jpeg', 'jfif');
+        $pt_id = $stmt->insert_id; //ตารางมีคอลัมน์เป็น AUTO
+        $image_uploaded = $_FILES['pimg']['name'] != "";
+        
+        if ($image_uploaded) {
+            $allowed = ['gif', 'png', 'jpg', 'jpeg', 'jfif'];
             $filename = $_FILES['pimg']['name'];
             $picture_ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
 
-            // ตรวจสอบชนิดของไฟล์
             if (!in_array($picture_ext, $allowed)) {
                 echo "<script>alert('แก้ไขข้อมูลสินค้าไม่สำเร็จ! ไฟล์รูปต้องเป็น jpg, gif หรือ png เท่านั้น');</script>";
-            } else {
-                // ตั้งชื่อไฟล์ใหม่โดยใช้ pt_id
-                $new_filename = "type" . $pt_id . "." . $picture_ext;
-                $destination_path = "images/" . $new_filename;
+                exit;
+            }
 
-                // ย้ายไฟล์ไปยังโฟลเดอร์เก็บภาพ
-                if (move_uploaded_file($_FILES['pimg']['tmp_name'], $destination_path)) {
-                    // อัปเดตชื่อไฟล์ในฐานข้อมูล
-                    $sql_update = "UPDATE product_type SET t_picture = ? WHERE pt_id = ?";
-                    $stmt_update = $conn->prepare($sql_update);
-                    $stmt_update->bind_param("si", $new_filename, $pt_id);
+            $new_filename = "type" . $pt_id . "." . $picture_ext;
+            $destination_path = "images/" . $new_filename;
 
-                    if ($stmt_update->execute()) {
-                        echo "<script>alert('เพิ่มข้อมูลสินค้าสำเร็จ'); window.location='a-type.php';</script>";
-                    } else {
-                        echo "<script>alert('เกิดข้อผิดพลาดในการบันทึกข้อมูลในฐานข้อมูล');</script>";
-                    }
+            if (move_uploaded_file($_FILES['pimg']['tmp_name'], $destination_path)) {
+                $sql_update = "UPDATE product_type SET t_picture = ? WHERE pt_id = ?";
+                $stmt_update = $conn->prepare($sql_update);
+                $stmt_update->bind_param("si", $new_filename, $pt_id);
 
-                    $stmt_update->close();
+                if ($stmt_update->execute()) {
+                    echo "<script>alert('เพิ่มข้อมูลประเภทสินค้าสำเร็จ'); window.location='a-type.php';</script>";
                 } else {
-                    echo "<script>alert('เกิดข้อผิดพลาดในการอัปโหลดรูปภาพ');</script>";
+                    echo "<script>alert('เกิดข้อผิดพลาดในการบันทึกข้อมูลในฐานข้อมูล');</script>";
                 }
+                $stmt_update->close();
+            } else {
+                echo "<script>alert('เกิดข้อผิดพลาดในการอัปโหลดรูปภาพ');</script>";
             }
         } else {
-            echo "<script>alert('เพิ่มข้อมูลสินค้าสำเร็จ'); window.location='a-type.php';</script>";
+            echo "<script>alert('เพิ่มข้อมูลประเภทสินค้าสำเร็จ'); window.location='a-type.php';</script>";
         }
     } else {
-        echo "<script>alert('เพิ่มข้อมูลสินค้าไม่สำเร็จ');</script>";
+        echo "<script>alert('เพิ่มข้อมูลประเภทสินค้าไม่สำเร็จ');</script>";
     }
 
     $stmt->close();
