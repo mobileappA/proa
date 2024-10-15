@@ -53,13 +53,13 @@ $data1 = mysqli_fetch_array($rs1);
             </div>
         </div>
 
-        <!-- ฟอร์มอัปโหลดรูปภาพ -->
+        <!-- ฟอร์มอัปโหลดรูปภาพค้าบบบ ทำให้มันลูปสร้าง 4 รอบ-->
         <?php for ($i = 1; $i <= 4; $i++) { ?>
         <div class="form-group">
             <label class="col-md-4 control-label f1" for="file">รูปภาพที่ <?= $i ?></label>
             <div class="col-md-4">
                 <input class="form-control" name="pimg<?= $i ?>" type="file">
-                <input type="hidden" name="old_picture<?= $i ?>" value="<?= htmlspecialchars($data1["p_picture$i"]); ?>">
+                <input type="hidden" name="ppicture<?= $i ?>" value="<?= htmlspecialchars($data1["p_picture$i"]); ?>">
             </div>
         </div>
         <?php } ?>
@@ -89,7 +89,7 @@ $data1 = mysqli_fetch_array($rs1);
 if (isset($_POST['Submit'])) {
     $new_pictures = array();
     for ($i = 1; $i <= 4; $i++) {
-        $new_pictures[$i] = $_POST["old_picture$i"];
+        $new_pictures[$i] = $_POST["ppicture$i"];
         if ($_FILES["pimg$i"]['name'] != "") {
             $allowed = array('gif', 'png', 'jpg', 'jpeg', 'jfif');
             $filename = $_FILES["pimg$i"]['name'];
