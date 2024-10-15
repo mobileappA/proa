@@ -102,57 +102,61 @@ $show_address3 = !empty($data['c_address3']);
         </main>
     </div>
 
-<?php
+    <?php
 if (isset($_POST['Submit'])) {
     $total = 0;
     foreach ($_SESSION['sid'] as $key => $pid) {
         $sum[$pid] = $_SESSION['sprice'][$key] * $_SESSION['sitem'][$key];
         $total += $sum[$pid];
+
+        // คำนวณส่วนลดตามยอดรวม
         if ($total >= 500 && $total < 1000) {
-            $num= '20%';
+            $num = '20%';
             $discount = $total * 0.2;
         } elseif ($total >= 1000 && $total < 2000) {
-            $num= '30%';
+            $num = '30%';
             $discount = $total * 0.3;
         } elseif ($total >= 2000) {
-            $num= '40%';
+            $num = '40%';
             $discount = $total * 0.4;
         } else {
-            $num= '0%';
+            $num = '0%';
             $discount = 0;
         }
-        $net_total = $total - $discount;
     }
 
-// ตรวจสอบค่าที่อยู่ที่ลูกค้าเลือก
-$selected_address = '';
-if ($_POST['address'] == '1') {
-    $selected_address = $data['c_address1'];
-} elseif ($_POST['address'] == '2') {
-    $selected_address = $data['c_address2'];
-} elseif ($_POST['address'] == '3') {
-    $selected_address = $data['c_address3'];
-}
+    $net_total = $total - $discount;
 
-	
-    echo "Selected Address: " . $selected_address;
+    // ตรวจสอบค่าที่อยู่ที่ลูกค้าเลือก
+    $selected_address = '';
+    if ($_POST['address'] == '1') {
+        $selected_address = $data['c_address1'];
+    } elseif ($_POST['address'] == '2') {
+        $selected_address = $data['c_address2'];
+    } elseif ($_POST['address'] == '3') {
+        $selected_address = $data['c_address3'];
+    }
 
-	$sql = "insert into `orders` values('','$net_total', CURRENT_TIMESTAMP, '{$_SESSION['cid']}','$selected_address','สั่งซื้อสินค้าสำเร็จ');" ;
+    // แทรกข้อมูลการสั่งซื้อในตาราง orders โดยไม่ใส่ค่าใน oid
+    $sql = "INSERT INTO `orders` (net_total, order_date, cid, address, status) 
+            VALUES ('$net_total', CURRENT_TIMESTAMP, '{$_SESSION['cid']}', '$selected_address', 'สั่งซื้อสินค้าสำเร็จ');";
 
-// รันคำสั่ง SQL
-mysqli_query($conn, $sql) or die(mysqli_error($conn));
+    // รันคำสั่ง SQL
+    mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
     // Get last inserted order id
     $id = mysqli_insert_id($conn);
 
- foreach($_SESSION['sid'] as $pid) {
-		$sql2 = "insert into orders_detail values('', '$id', '".$_SESSION['sid'][$pid]."', '".$_SESSION['sitem'][$pid]."');" ;
-		mysqli_query($conn, $sql2);
-		
+    // เพิ่มข้อมูลในตาราง orders_detail
+    foreach ($_SESSION['sid'] as $key => $pid) {
+        $sql2 = "INSERT INTO orders_detail (oid, pid, quantity) 
+                 VALUES ('$id', '{$_SESSION['sid'][$key]}', '{$_SESSION['sitem'][$key]}');";
+        mysqli_query($conn, $sql2) or die(mysqli_error($conn));
     }
 
     echo "<meta http-equiv=\"refresh\" content=\"0;URL=clear.php\">";
 }
 ?>
+
 </body>
 </html>
