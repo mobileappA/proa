@@ -117,7 +117,7 @@ if (isset($_POST['Submit'])) {
                         }
 
                         // ผูกค่ากับพารามิเตอร์สำหรับการอัปเดต
-                        $stmt_update->bind_param("si", $new_filename_in_db, $idauto);
+                        $stmt_update->bind_param("ss", $new_filename_in_db, $idauto);
                         $stmt_update->execute();
                         $stmt_update->close();
                     }
