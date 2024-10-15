@@ -82,13 +82,13 @@ include_once("connectdb.php");
                 <?php } ?>
             </select>
             <br><br>
-            <button type="submit" name="Submit" class="btn btn-success center-block">เพิ่ม</button>
+            <button type="submit"  class="btn btn-success center-block">เพิ่ม</button>
         </div>
     </fieldset>
 </form>
 <hr>
 <?php
-if (isset($_POST['Submit'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // กำหนดตัวแปรสำหรับชื่อไฟล์ใหม่
     $new_picture1 = '';
     $new_picture2 = '';
