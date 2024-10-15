@@ -58,34 +58,41 @@ if (isset($_POST['Submit'])) {
         $allowed = array('gif', 'png', 'jpg', 'jpeg', 'jfif');
         $filename = $_FILES['pimg']['name'];
         $picture_ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION)); // นามสกุลไฟล์
+
         if (!in_array($picture_ext, $allowed)) {
             echo "<script>alert('แก้ไขข้อมูลสินค้าไม่สำเร็จ! ไฟล์รูปต้องเป็น jpg, gif หรือ png เท่านั้น');</script>";
             exit;
         }
 
         // ตั้งชื่อไฟล์ใหม่ให้ตรงกับ pt_id
-        $new_filename = "type".$pt_id ."." . $picture_ext;
+        $new_filename = "type" . $pt_id . "." . $picture_ext;
 
         // ย้ายไฟล์รูปไปยังโฟลเดอร์ images ด้วยชื่อที่ตรงกับ p_id
         if (move_uploaded_file($_FILES['pimg']['tmp_name'], "images/" . $new_filename)) {
             // หากการอัปโหลดไฟล์สำเร็จ ทำการอัปเดตข้อมูลในฐานข้อมูล
-            $sql = "UPDATE `product_type` SET `pt_name`='{$_POST['ptname']}', `t_picture`='{$new_filename}' WHERE `pt_id`='{$pt_id}'"; // แก้ไขคำสั่ง SQL
+            $sql = "UPDATE `product_type` SET `pt_name`='{$_POST['ptname']}', `t_picture`='{$new_filename}' WHERE `pt_id`='{$pt_id}'"; 
+
+            // ทำการอัปเดตข้อมูลในฐานข้อมูล
+            if (mysqli_query($conn, $sql)) {
+                echo "<script>alert('แก้ไขข้อมูลสำเร็จ'); window.location='a-type.php';</script>";
+            } else {
+                echo "<script>alert('แก้ไขข้อมูลไม่สำเร็จ: " . mysqli_error($conn) . "');</script>";
+            }
         } else {
             echo "<script>alert('เกิดข้อผิดพลาดในการอัปโหลดรูปภาพ');</script>";
             exit;
         }
     } else {
         // กรณีที่ไม่ได้อัปโหลดรูปใหม่
-        $sql = "UPDATE `product_type` SET `pt_name`='{$_POST['ptname']}' WHERE `pt_id`='{$pt_id}'"; // แก้ไขคำสั่ง SQL
-    }
-
-    // ทำการอัปเดตข้อมูลในฐานข้อมูล
-    if (mysqli_query($conn, $sql)) {
-        echo "<script>alert('แก้ไขข้อมูลสำเร็จ'); window.location='a-type.php';</script>";
-    } else {
-        echo "<script>alert('แก้ไขข้อมูลไม่สำเร็จ');</script>";
+        $sql = "UPDATE `product_type` SET `pt_name`='{$_POST['ptname']}' WHERE `pt_id`='{$pt_id}'";
+        if (mysqli_query($conn, $sql)) {
+            echo "<script>alert('แก้ไขข้อมูลสำเร็จ'); window.location='a-type.php';</script>";
+        } else {
+            echo "<script>alert('แก้ไขข้อมูลไม่สำเร็จ: " . mysqli_error($conn) . "');</script>";
+        }
     }
 }
+
 ?>
 
 </body>
