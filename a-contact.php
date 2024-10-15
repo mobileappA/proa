@@ -121,6 +121,7 @@ include_once("r-checklogin.php");
             <thead class="table-success f1">
                 <tr class="f1">
                     <th class="f1">ลบ</th>
+                    <th class="f1">ที่</th>
                     <th class="f1">ชื่อ</th>
                     <th class="f1">อีเมล</th>
                     <th class="f1">ข้อความ</th>
@@ -136,6 +137,7 @@ while ($data = mysqli_fetch_array($rs)) {
 ?>
                 <tr class="f1">
                     <td class="f1"><a href="a-deletecontact.php?id=<?=$data['id'];?>" onClick="return confirm('ยืนยันการลบ');" class="btn btn-danger btn-sm f1"><i class="bi bi-trash"></i> ลบ</a></td>
+                    <td class="f1"><?= htmlspecialchars($data['id']); ?></td>
                     <td class="f1"><?= htmlspecialchars($data['name']); ?></td>
                     <td class="f1"><?= htmlspecialchars($data['email']); ?></td>
                     <td class="f1"><?= htmlspecialchars($data['message']); ?></td>
