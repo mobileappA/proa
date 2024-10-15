@@ -12,37 +12,11 @@ echo ($_SESSION['aname']);
     <title>ร้านเขียนฝัน</title>
     <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
     <style>
-        .f1 {
+        body, h1, h2, h3, h4, h5, h6, label, input, textarea, select, button {
             font-family: "Itim", cursive;
             font-weight: 500;
-            color: #2F4F4F;
         }
-        .f2 {
-            font-family: "Itim", cursive;
-            font-weight: 500;
-            font-style: oblique;
-            color: #FF5733;
-        }
-        input::placeholder {
-            font-family: "Itim", cursive;
-            color: #aaa;
-            font-size: 14px;
-        }
-        .btn-light-blue {
-            background-color: #b4daf4;
-            color: black;
-            border: none;
-        }
-        .btn-light-blue:hover {
-            background-color: #ff99cc;
-            color: white;
-        }
-        .navbar {
-            background-color: #CCFFCC;
-        }
-        .navbar .nav-link {
-            color: #2F4F4F;
-        }
+      
     </style>
 </head>
 
