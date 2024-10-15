@@ -13,10 +13,10 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
 <style>
-    .f1 {
-        font-family: "Itim", cursive;
-        font-weight: 500;
-    }
+        body, h1, h2, h3, h4, h5, h6, label, input, textarea, select, button {
+            font-family: "Itim", cursive;
+            font-weight: 500;
+        }
     .form-signin {
         background-color: white;
         border-radius: 0.5rem;

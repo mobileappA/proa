@@ -18,10 +18,9 @@ $data1 = mysqli_fetch_array($rs1);
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
     <style>
-        .f1 {
+        body, h1, h2, h3, h4, h5, h6, label, input, textarea, select, button {
             font-family: "Itim", cursive;
             font-weight: 500;
-            color: #2F4F4F;
         }
     </style>
 </head>

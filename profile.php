@@ -33,7 +33,7 @@ if (!$data) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
-        .f1 {
+        body, h1, h2, h3, h4, h5, h6, label, input, textarea, select, button {
             font-family: "Itim", cursive;
             font-weight: 500;
         }
