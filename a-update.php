@@ -118,7 +118,7 @@ if (isset($_POST['Submit'])) {
             exit;
         }
         $new_picture1 = $p_id . ".1." . $picture_ext; // ตั้งชื่อไฟล์ใหม่เป็น 1.1
-        copy($_FILES['pimg1']['tmp_name'], "images/" . $new_picture1);
+        move_uploaded_file($_FILES['pimg1']['tmp_name'], "images/" . $new_picture1);
     }
 
     if ($_FILES['pimg2']['name'] != "") {
@@ -130,7 +130,7 @@ if (isset($_POST['Submit'])) {
             exit;
         }
         $new_picture2 = $p_id . ".2." . $picture_ext; // ตั้งชื่อไฟล์ใหม่เป็น 1.2
-        copy($_FILES['pimg2']['tmp_name'], "images/" . $new_picture2);
+        move_uploaded_file($_FILES['pimg2']['tmp_name'], "images/" . $new_picture2);
     }
 
     if ($_FILES['pimg3']['name'] != "") {
@@ -142,7 +142,7 @@ if (isset($_POST['Submit'])) {
             exit;
         }
         $new_picture3 = $p_id . ".3." . $picture_ext; // ตั้งชื่อไฟล์ใหม่เป็น 1.3
-        copy($_FILES['pimg3']['tmp_name'], "images/" . $new_picture3);
+        move_uploaded_file($_FILES['pimg3']['tmp_name'], "images/" . $new_picture3);
     }
 
     if ($_FILES['pimg4']['name'] != "") {
@@ -154,7 +154,7 @@ if (isset($_POST['Submit'])) {
             exit;
         }
         $new_picture4 = $p_id . ".4." . $picture_ext; // ตั้งชื่อไฟล์ใหม่เป็น 1.4
-        copy($_FILES['pimg4']['tmp_name'], "images/" . $new_picture4);
+        move_uploaded_file($_FILES['pimg4']['tmp_name'], "images/" . $new_picture4);
     }
 
     // สร้าง SQL สำหรับอัปเดตข้อมูลในฐานข้อมูล
