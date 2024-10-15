@@ -1,7 +1,7 @@
-<?php  include_once("r-checklogin.php");
+<?php  
+include_once("r-checklogin.php");
 include_once("connectdb.php");
 ?>
-
 
 <!doctype html>
 <html>
@@ -18,10 +18,11 @@ include_once("connectdb.php");
     </style>
 </head>
 <body>
-<center> <h1>เขียนฝัน- เพิ่มสินค้า </h1> </center>
+<center><h1>เขียนฝัน- เพิ่มสินค้า</h1></center>
 
 <form class="form-horizontal f1" method="post" action="" enctype="multipart/form-data">
     <fieldset>
+        <!-- ชื่อสินค้า -->
         <div class="form-group">
             <label class="col-md-4 control-label f1" for="textinput">ชื่อสินค้า</label>
             <div class="col-md-4">
@@ -29,6 +30,7 @@ include_once("connectdb.php");
             </div>
         </div>
 
+        <!-- รายละเอียดสินค้า -->
         <div class="form-group">
             <label class="col-md-4 control-label f1" for="textarea">รายละเอียดสินค้า</label>
             <div class="col-md-4">
@@ -36,6 +38,7 @@ include_once("connectdb.php");
             </div>
         </div>
 
+        <!-- ราคา -->
         <div class="form-group">
             <label class="col-md-4 control-label f1" for="number">ราคา</label>
             <div class="col-md-4">
@@ -43,17 +46,18 @@ include_once("connectdb.php");
             </div>
         </div>
 
-        <!-- ฟอร์มอัปโหลดรูปภาพค้าบบบ ทำให้มันลูปสร้าง 4 รอบ-->
+        <!-- รูปภาพ -->
         <?php for ($i = 1; $i <= 4; $i++) { ?>
         <div class="form-group">
             <label class="col-md-4 control-label f1" for="file">รูปภาพที่ <?= $i ?></label>
             <div class="col-md-4">
                 <input class="form-control" name="pimg<?= $i ?>" type="file">
-                <input type="hidden" name="ppicture<?= $i ?>" value="<?= htmlspecialchars($data1["p_picture$i"]); ?>">
+                <input type="hidden" name="ppicture<?= $i ?>" >
             </div>
         </div>
         <?php } ?>
-        
+
+        <!-- ประเภทสินค้า -->
         <div class="form-group">
             <label class="col-md-4 control-label f1" for="pt">ประเภทสินค้า</label>
             <div class="col-md-4">
@@ -70,16 +74,17 @@ include_once("connectdb.php");
                 </select>
             </div>
         </div>
+        
+        <!-- ปุ่มบันทึก -->
         <br><br>
         <button type="submit" name="Submit" class="btn btn-success center-block f1">บันทึก</button>
     </fieldset>
 </form>
 <hr>
+
 <?php
 if (isset($_POST['Submit'])) {
-
-
-    // สร้าง SQL สำหรับเพิ่มข้อมูลสินค้าใหม่ลงในฐานข้อมูลก่อน เพื่อให้ได้ p_id
+    // สร้าง SQL สำหรับเพิ่มข้อมูลสินค้าใหม่ลงในฐานข้อมูล
     $sql_insert = "INSERT INTO `product` (`p_name`, `p_detail`, `p_price`, `pt_id`) 
                    VALUES (
                        '{$_POST['pname']}', 
@@ -91,29 +96,30 @@ if (isset($_POST['Submit'])) {
     if (mysqli_query($conn, $sql_insert)) {
         // รับ p_id ที่เพิ่งถูกสร้างใหม่
         $p_id = mysqli_insert_id($conn);
-            $new_pictures = array();
-            for ($i = 1; $i <= 4; $i++) {
-                $new_pictures[$i] = $_POST["ppicture$i"];
-                if ($_FILES["pimg$i"]['name'] != "") {
-                    $allowed = array('gif', 'png', 'jpg', 'jpeg', 'jfif');
-                    $filename = $_FILES["pimg$i"]['name'];
-                    $picture_ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
-                    if (!in_array($picture_ext, $allowed)) {
-                        echo "<script>alert('แก้ไขข้อมูลไม่สำเร็จ! ไฟล์ต้องเป็น jpg, gif หรือ png เท่านั้น');</script>";
-                        exit;
-                    }
-                    $new_pictures[$i] = $p_id . ".$i." . $picture_ext;
-                    move_uploaded_file($_FILES["pimg$i"]['tmp_name'], "images/" . $new_pictures[$i]);
+
+        // จัดการรูปภาพ
+        $new_pictures = array();
+        for ($i = 1; $i <= 4; $i++) {
+            $new_pictures[$i] = $_POST["ppicture$i"];
+            if ($_FILES["pimg$i"]['name'] != "") {
+                $allowed = array('gif', 'png', 'jpg', 'jpeg', 'jfif');
+                $filename = $_FILES["pimg$i"]['name'];
+                $picture_ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+                if (!in_array($picture_ext, $allowed)) {
+                    echo "<script>alert('เพิ่มสินค้าล้มเหลว! ไฟล์ต้องเป็น gif, png, jpg, jpeg, jfif เท่านั้น');</script>";
+                    exit;
                 }
+                $new_pictures[$i] = $p_id . ".$i." . $picture_ext;
+                move_uploaded_file($_FILES["pimg$i"]['tmp_name'], "images/" . $new_pictures[$i]);
             }
         }
 
         // สร้าง SQL สำหรับอัปเดตชื่อไฟล์ในฐานข้อมูล
         $sql_update = "UPDATE `product` SET 
-                            `p_picture1`='{$new_picture[1]}', 
-                            `p_picture2`='{$new_picture[2]}', 
-                            `p_picture3`='{$new_picture[3]}', 
-                            `p_picture4`='{$new_picture[4]}' 
+                            `p_picture1`='{$new_pictures[1]}', 
+                            `p_picture2`='{$new_pictures[2]}', 
+                            `p_picture3`='{$new_pictures[3]}', 
+                            `p_picture4`='{$new_pictures[4]}' 
                         WHERE `p_id`='{$p_id}';";
 
         // ทำการอัปเดตชื่อไฟล์ในฐานข้อมูล
@@ -122,15 +128,10 @@ if (isset($_POST['Submit'])) {
         } else {
             echo "<script>alert('เพิ่มสินค้าล้มเหลว');</script>";
         }
-
     } else {
         echo "<script>alert('เพิ่มสินค้าล้มเหลว');</script>";
     }
-
+}
 ?>
-
-
-
-
 </body>
 </html>
