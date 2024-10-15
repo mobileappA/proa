@@ -70,7 +70,7 @@ if (isset($_POST['Submit'])) {
         // ย้ายไฟล์รูปไปยังโฟลเดอร์ images ด้วยชื่อที่ตรงกับ p_id
         if (move_uploaded_file($_FILES['pimg']['tmp_name'], "images/" . $new_filename)) {
             // หากการอัปโหลดไฟล์สำเร็จ ทำการอัปเดตข้อมูลในฐานข้อมูล
-            $sql = "UPDATE `product_type` SET `pt_name`='{$_POST['ptname']}', `t_picture`='{$new_filename}' WHERE `pt_id`='{$pt_id}'"; 
+            $sql = "UPDATE `product_type` SET `pt_name`='{$_POST['ptname']}', `t_picture`='{$new_filename}' WHERE `pt_id`='{$pt_id}'";
 
             // ทำการอัปเดตข้อมูลในฐานข้อมูล
             if (mysqli_query($conn, $sql)) {
@@ -80,7 +80,6 @@ if (isset($_POST['Submit'])) {
             }
         } else {
             echo "<script>alert('เกิดข้อผิดพลาดในการอัปโหลดรูปภาพ');</script>";
-            exit;
         }
     } else {
         // กรณีที่ไม่ได้อัปโหลดรูปใหม่
