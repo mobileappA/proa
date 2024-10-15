@@ -1,95 +1,102 @@
-<!doctype html>
-<html lang="th">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ติดต่อเรา</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- ฟอนต์ Google -->
-    <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<?php include_once("connectdb.php"); ?>
 
+<!doctype html>
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+    <meta charset="utf-8">
+    <title>สมัครสมาชิก</title>
     <style>
-        body {
+        body, h1, label, input, button {
             font-family: "Itim", cursive;
-            background-color: #f8f9fa;
-        }
-        .contact-info {
-            margin: 20px 0;
-        }
-        .contact-info h4 {
-            margin-bottom: 15px;
-        }
-        .icon {
-            font-size: 24px;
-            color: #007bff;
-            margin-right: 10px;
-        }
-        .form-control, .btn {
-            border-radius: 0.25rem;
+            font-weight: 500;
         }
     </style>
 </head>
 <body>
-    <div class="container my-5">
-    <a href="index.php" class="btn position-absolute top-0 end-0 m-2"><i class="bi bi-x-circle-fill" style="font-size: 2rem;"></i></a>
-        <h1 class="text-center mb-4">ติดต่อเรา</h1>
-        <div class="contact-info">
-            <h4><i class="bi bi-house icon"></i>ที่อยู่</h4>
-            <p>มหาวิทยาลัยมหาสารคาม ต.ขามเรียง ต.กันทรวิชัย  จ.มหาสารคาม 44150</p>
+    <center><h1>สมัครสมาชิก</h1></center>
 
-            <h4><i class="bi bi-telephone icon"></i>เบอร์โทร</h4>
-            <p>0612345678</p>
-
-            <h4><i class="bi bi-envelope icon"></i>อีเมล</h4>
-            <p>appm81554@gmail.com</p>
+    <form class="form-horizontal" method="post" action="">
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="cfullname">ชื่อ-นามสกุล</label>
+            <div class="col-md-4">
+                <input id="cfullname" name="cfullname" type="text" class="form-control input-md" required autofocus><br>
+            </div>
         </div>
 
-        <h2 class="mt-5">ส่งข้อความถึงเรา</h2>
-        <form method="POST" action="">
-    <div class="mb-3">
-        <label for="name" class="form-label">ชื่อ</label>
-        <input type="text" class="form-control" id="name" name="name" placeholder="ชื่อของคุณ" required>
-    </div>
-    <div class="mb-3">
-        <label for="email" class="form-label">อีเมล</label>
-        <input type="email" class="form-control" id="email" name="email" placeholder="@example.com" required>
-    </div>
-    <div class="mb-3">
-        <label for="message" class="form-label">ข้อความ</label>
-        <textarea class="form-control" id="message" name="message" rows="4" placeholder="ข้อความของคุณ" required></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary">ส่งข้อความ</button>
-</form>
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="caddress">ที่อยู่</label>
+            <div class="col-md-4">
+                <textarea id="caddress" name="caddress" class="form-control" required></textarea><br>
+            </div>
+        </div>
 
-    </div>
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="cphonnumber">เบอร์โทรศัพท์</label>
+            <div class="col-md-4">
+                <input id="cphonnumber" name="cphonnumber" type="text" class="form-control input-md" required><br>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="cemail">อีเมล</label>
+            <div class="col-md-4">
+                <input id="cemail" name="cemail" type="email" class="form-control input-md" required><br>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="cpassword">รหัสผ่าน</label>
+            <div class="col-md-4">
+                <input id="cpassword" name="cpassword" type="password" class="form-control input-md" required><br>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-4 col-md-offset-4">
+                <button type="submit" name="Submit" class="btn btn-success">สมัครสมาชิก</button>
+            </div>
+        </div>
+    </form>
+
     <?php
-include("connectdb.php"); // เชื่อมต่อฐานข้อมูล
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // ตรวจสอบว่าข้อมูลฟอร์มมีการส่งมาหรือไม่
+        if (isset($_POST['cfullname'], $_POST['caddress'], $_POST['cphonnumber'], $_POST['cemail'], $_POST['cpassword'])) {
+            // เก็บข้อมูลที่ส่งมาจากฟอร์ม
+            $cfullname = $_POST['cfullname'];
+            $caddress = $_POST['caddress'];
+            $cphonnumber = $_POST['cphonnumber'];
+            $cemail = $_POST['cemail'];
+            $cpassword = password_hash($_POST['cpassword'], PASSWORD_BCRYPT); // เข้ารหัสรหัสผ่านด้วย bcrypt
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // รับข้อมูลจากฟอร์ม
-    $name = mysqli_real_escape_string($conn, $_POST['name']);
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $message = mysqli_real_escape_string($conn, $_POST['message']);
+            // เตรียมคำสั่ง SQL
+            $sql = "INSERT INTO member (c_fullname, c_address1, c_phonnumber, c_email, c_password) 
+                    VALUES (?, ?, ?, ?, ?)";
+            
+            // เตรียม statement
+            $stmt = mysqli_prepare($conn, $sql);
 
-    
-    $sql = "INSERT INTO contacts (name, email, message) VALUES ('$name', '$email', '$message')";
+            // ผูกตัวแปร
+            mysqli_stmt_bind_param($stmt, "sssss", $cfullname, $caddress, $cphonnumber, $cemail, $cpassword);
 
-    
-    if (mysqli_query($conn, $sql)) {
-        echo "<script>alert('ส่งข้อความเรียบร้อยแล้ว'); window.location.href='index.php';</script>";
-    } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+            // ตรวจสอบว่าคำสั่งสำเร็จหรือไม่
+            if (mysqli_stmt_execute($stmt)) {
+                echo "<script>alert('สมัครสมาชิกเรียบร้อยแล้ว'); window.location='login_page.php';</script>";
+            } else {
+                echo "<script>alert('เกิดข้อผิดพลาด: " . mysqli_stmt_error($stmt) . "');</script>";
+            }
+
+            // ปิด statement
+            mysqli_stmt_close($stmt);
+        } else {
+            echo "<script>alert('กรุณากรอกข้อมูลให้ครบถ้วน');</script>";
+        }
+
+        // ปิดการเชื่อมต่อฐานข้อมูล
+        mysqli_close($conn);
     }
-
-   
-    mysqli_close($conn);
-}
-
-?>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    ?>
 </body>
 </html>

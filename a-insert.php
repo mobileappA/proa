@@ -1,4 +1,5 @@
-<?php  include_once("r-checklogin.php");?>
+<?php  include_once("r-checklogin.php");
+ include_once("connectdb.php");?>
 
 <!doctype html>
 <html>
@@ -17,7 +18,7 @@
 <body>
 <center> <h1>เขียนฝัน- เพิ่มสินค้า </h1> </center>
 
-<form class="form-horizontal" method="post" action="" enctype="multipart/form-data">
+<form class="form-horizontal" method="POST" action="" enctype="multipart/form-data">
     <fieldset>
         <div class="form-group">
             <label class="col-md-4 control-label" for="textinput">ชื่อสินค้า</label>
@@ -70,7 +71,7 @@
             <label class="col-md-4 control-label" for="ptname">ประเภทสินค้า</label>
             <select name="pt" id="pt" class="form-select">
                 <?php
-                include_once("connectdb.php");
+               
                 $sql2 = "SELECT * FROM product_type ORDER BY pt_name ASC ";
                 $rs2 = mysqli_query($conn, $sql2);
                 while ($data2 = mysqli_fetch_array($rs2)) {
