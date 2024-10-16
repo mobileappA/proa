@@ -19,6 +19,13 @@
             padding: 2rem;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+        .btn {
+        width: 300px; 
+        height: 50px; 
+        display: block; 
+        margin: 10px auto; 
+        font-size: 18px; 
+    }
         .btn-light-blue {
             background-color: #b4daf4;
             color: black;
@@ -85,20 +92,22 @@
 
 <body>
     <div class="container text-center">
-        <main class="form-home" >
-        <a href="index.php" >
-            <img class="mb-3" src="images/Logo.png"  alt="" width="50%" height="50%"></a>
+        <main class="form-home">
+            <a href="index.php">
+                <img class="mb-3" src="images/Logo.png" style="max-width: 100%; height: auto;">
+            </a>
             <h1 class="h5 mb-3 fw-normal"><span class="f1">ยินดีต้อนรับ</span></h1>
             <div class="container my-5">
-				<a href="a-product.php" class="btn btn-light-purple f1"><i class="bi bi-arrow-left-circle"></i>จัดการข้อมูลสินค้า</a><br><br>
-                <a href="a-managecustomer.php" class="btn btn-light-blue f1"><i class="bi bi-arrow-left-circle"></i>จัดการข้อมูลลูกค้า</a><br><br>
-                <a href="a-manageorder.php" class="btn btn-light-green f1"><i class="bi bi-trash"></i>จัดการออเดอร์ลูกค้า</a>
-				<br><br>
-                <a href="a-type.php" class="btn btn-light-pink f1"><i class="bi bi-trash"></i>จัดการประเภทสินค้า</a>
-				<br><br>
-                <a href="a-contact.php" class="btn btn-light-orange f1"><i class="bi bi-trash"></i>ข้อความจากลูกค้า</a>
-
+                <a href="a-product.php" class="btn btn-light-purple f1"><i class="bi bi-arrow-left-circle"></i> จัดการข้อมูลสินค้า</a>
+                <a href="a-managecustomer.php" class="btn btn-light-blue f1"><i class="bi bi-arrow-left-circle"></i> จัดการข้อมูลลูกค้า</a>
+                <a href="a-manageorder.php" class="btn btn-light-green f1"><i class="bi bi-trash"></i> จัดการออเดอร์ลูกค้า</a>
+                <a href="a-type.php" class="btn btn-light-pink f1"><i class="bi bi-trash"></i> จัดการประเภทสินค้า</a>
+                <a href="a-contact.php" class="btn btn-light-orange f1"><i class="bi bi-trash"></i> ข้อความจากลูกค้า</a>
             </div>
+        </main>
+    </div>
+</body>
+
         </main>
     </div>
 </body>
