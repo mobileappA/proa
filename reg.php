@@ -35,7 +35,7 @@
         <i class="bi bi-x-circle-fill" style="font-size: 2rem;"></i>
     </a>
     <div class="container text-center">
-        <main class="form-signin m-auto" style="max-width: 400px;">
+        <main class="form-signin m-auto p-6" style="max-width: 400px;">
             <form method="POST" action="">
                 <img class="mb-3 img-fluid" src="images/Logo.png" alt="" style="max-width: 100%; height: auto;">
                 <hr>
