@@ -1,3 +1,8 @@
+<?php
+include_once("r-checklogin.php");
+include_once("connectdb.php");
+?>
+
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
 <head>
@@ -18,63 +23,60 @@
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/2.1.7/js/dataTables.js"></script>
 
-    <script>
+<script>
         $(document).ready(function() {
             $('#myTable').DataTable();
         });
     </script>
 
     <style>
-        body {
-            background-color: #AFEEEE; /* สีพื้นหลังของทั้งหน้า */
-            margin: 0; /* ลด margin */
-        }
-        .f1 {
-            font-family: "Itim", cursive;
-            font-weight: 500;
-        }
-        .f2 {
-            font-family: "Itim", cursive;
-            font-weight: 500;
-            font-style: oblique;
-            color: #FF5733;
-        }
-        input::placeholder {
-            font-family: "Itim", cursive;
-            color: #aaa;
-            font-size: 14px;
-        }
-        .btn-light-blue {
-            background-color: #90caf9; /* สีพื้นหลังของปุ่ม */
-            color: black;
-            border: none;
-        }
-        .btn-light-blue:hover {
-            background-color: #ff4081; /* สีพื้นหลังเมื่อวางเมาส์ */
-            color: white;
-        }
-        .navbar {
-            background-color: #48D1CC; /* สีพื้นหลังของ Navbar */
-        }
-        .navbar .nav-link {
-            color: #20c997; /* สีข้อความใน Navbar */
-        }
-        .container-fluid {
-            padding: 15px; /* เพิ่ม padding ให้กับ container */
-        }
+    body {
+	background-color: #AFEEEE; /* สีพื้นหลังของทั้งหน้า */
+    }
+    .f1 {
+        font-family: "Itim", cursive;
+        font-weight: 500;
+       
+    }
+    .f2 {
+        font-family: "Itim", cursive;
+        font-weight: 500;
+        font-style: oblique;
+        color: #FF5733;
+    }
+    input::placeholder {
+        font-family: "Itim", cursive;
+        color: #aaa;
+        font-size: 14px;
+    }
+    .btn-light-blue {
+        background-color: #90caf9; /* สีพื้นหลังของปุ่ม */
+        color: black;
+        border: none;
+    }
+    .btn-light-blue:hover {
+        background-color: #ff4081; /* สีพื้นหลังเมื่อวางเมาส์ */
+        color: white;
+    }
+    .navbar {
+	background-color: #48D1CC; /* สีพื้นหลังของ Navbar */
+    }
+    .navbar .nav-link {
+        color: #20c997; /* สีข้อความใน Navbar */
+    }
     </style>
 </head>
 <body>
 
 <header data-bs-theme="#8470FF">
     <div class="collapse text-bg-#8470FF" id="navbarHeader" style="background-color:#48D1CC;">
-        <div class="container-fluid">
+        <div class="container">
             <div class="row">
                 <div class="col-sm-8 col-md-7 py-4">
                     <h4 class="f1">About</h4>
                     <p class="text-body-secondary f1">อุปกรณ์เครื่องเขียนสุดน่ารัก</p>
                 </div>
-                <div class="col-sm-4 offset-md-1 py-4">
+                <div class="col-sm-4 offset-md-1 py-4" >
                     <h4 class="f1">ผู้ดูแลระบบ</h4>
                     <ul class="list-unstyled f1">
                         <li class="f1"><?= $_SESSION['aname'];?></li>
@@ -82,27 +84,28 @@
                         <li><a href="a-product.php" class="text-dark">จัดการข้อมูลสินค้า</a></li>
                         <li><a href="a-managecustomer.php" class="text-dark">จัดการข้อมูลลูกค้า</a></li>
                         <li><a href="a-manageorder.php" class="text-dark">จัดการข้อมูลออเดอร์ลูกค้า</a></li>
-                        <li><a href="a-type.php" class="text-dark">จัดการข้อมูลประเภทสินค้า</a></li>
-                        <li><a href="a-contact.php" class="text-dark">ข้อความจากลูกค้า</a></li>
+                         <li><a href="a-type.php" class="text-dark">จัดการข้อมูลประเภทสินค้า</a></li>
+                         <li><a href="a-contact.php" class="text-dark">ข้อความจากลูกค้า</a></li>
+                       
                     </ul>
                 </div>
             </div>
         </div>
     </div>
     <div class="navbar navbar-#66CCFF bg-#66CCFF shadow-sm">
-        <div class="container-fluid">
+        <div class="container">
             <a href="a-home.php" class="navbar-brand d-flex align-items-center f1">
                 <strong class="f1">ร้านเขียนฝัน   <i class="bi bi-pencil-fill"></i></strong>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-        </div>
-    </div>
+      </div>
+  </div>
 </header>
 
 <main>
-    <section class="py-5 text-center container-fluid">
+    <section class="py-5 text-center container">
         <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
                 <h1 class="fw-light f1">ร้านเขียนฝัน</h1>
@@ -115,15 +118,15 @@
         </div>
     </section>
 
-    <div class="container-fluid border rounded-3 p-4 f1">
-        <h2 class="mb-4"><span class="f1">รายการสินค้า</span></h2>
+    <div class="container border rounded-3 p-4 f1">
+    <h2 class="mb-4"><span class="f1">รายการสินค้า</span></h2>
         <table id="myTable" class="table table-striped table-hover" style="width:100%">
             <thead>
                 <tr>
                     <th class="f1">แก้ไข</th>
                     <th class="f1">ลบ</th>
                     <th class="f1">Picture</th>
-                    <th class="f1">รหัสสินค้า</th>
+                     <th class="f1">รหัสสินค้า</th>
                     <th class="f1">ชื่อสินค้า</th>
                     <th class="f1">รายละเอียดสินค้า</th>
                     <th class="f1">ราคา</th>
@@ -151,7 +154,9 @@
                         </a>
                     </td>
                     <td>
-                        <a href="a-delete.php?pid=<?= $data['p_id'];?>" onClick="return confirm('ยืนยันการลบ');" class="btn btn-danger btn-sm f1"><i class="bi bi-trash"></i> ลบ</a>
+                    <a href="a-delete.php?pid=<?= $data['p_id'];?>" onClick="return confirm('ยืนยันการลบ');" class="btn btn-danger btn-sm f1"><i class="bi bi-trash"></i> ลบ</a>
+
+
                     </td>
                     <td>
                         <img src="images/<?= $data['p_picture1'];?>?<?= time();?>" width="100%" class="img-thumbnail">
@@ -162,7 +167,7 @@
                     <td class="f1"><?= $data['p_id'];?></td>
                     <td class="f1"><?= $data['p_name'];?></td>
                     <td class="f1"><?= $data['p_detail'];?></td>
-                    <td class="f1"><?= number_format($data['p_price'], 2);?> บาท</td>
+                    <td class="f1"><?= $data['p_price'];?></td>
                     <td class="f1"><?= $data['pt_name'];?></td>
                 </tr>
             <?php
@@ -173,6 +178,7 @@
     </div>
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-oBqDVmMz4fnFO9gybD5F8IfB1jE+yh7Wy1mg4B9gpZxU8F6VgD7A6JRGsF4n7B04" crossorigin="anonymous"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
