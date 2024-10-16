@@ -39,7 +39,8 @@
     <div class="container text-center">
         <main class="form-signin m-auto p-6" style="max-width: 400px;">
             <form method="POST" action="">
-            <img class="mb-3 img-fluid" src="images/Logo.png" alt="" style="max-width: 100%; height: auto; border-radius: 10px 10px 0 0;">
+                <br>
+                <img class="mb-3 img-fluid" src="images/Logo.png" alt="" style="max-width: 100%; height: auto;">
                 <hr>
                 <h1 class="h5 mb-3 fw-normal"><span class="f1">สมัครสมาชิก</span></h1>
                 <hr>
