@@ -26,7 +26,7 @@
         <?php
         if (isset($_POST['submit'])) {
             if ($_FILES['image']['name'] != "") {
-                $allowed = array('gif', 'png', 'jpg', 'jpeg', 'jfif');
+                $allowed = array('gif', 'png', 'jpg', 'jpeg', 'jfif','ico');
                 $filename = $_FILES['image']['name'];
                 $picture_ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
 
@@ -34,7 +34,7 @@
                     echo "<script>alert('อัปโหลดไม่สำเร็จ! ไฟล์รูปต้องเป็น jpg, gif หรือ png เท่านั้น');</script>";
                 } else {
                     // ตั้งชื่อไฟล์ใหม่
-                    $new_filename = "uploaded_image." . $picture_ext;
+                    $new_filename = "logo01." . $picture_ext;
 
                     // ย้ายไฟล์รูปไปยังโฟลเดอร์ images
                     if (move_uploaded_file($_FILES['image']['tmp_name'], "images/" . $new_filename)) {
