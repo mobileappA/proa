@@ -56,7 +56,7 @@ if (!$data) {
     <div class="container text-center">
         <main class="form-signin m-auto">
             <form method="POST" action="">
-                <img class="mb-3" src="images/Logo.png" alt="" width="50%" height="50%">
+                <img class="mb-3" src="images/Logo.png" alt="" style="max-width: 100%; height: auto;" >
                 <hr>
                 <h1 class="h5 mb-3 fw-normal"><span class="f1">ข้อมูลบัญชีผู้ใช้</span></h1>
                 <hr>
