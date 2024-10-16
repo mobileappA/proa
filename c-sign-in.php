@@ -32,12 +32,14 @@
 </style>
 </head>
 
-<body class="d-flex align-items-center justify-content-center vh-100 bg-body-tertiary">
-    <a href="index.php" class="btn position-absolute top-0 end-0 m-2"><i class="bi bi-x-circle-fill" style="font-size: 2rem;"></i></a>
+<body class="d-flex align-items-center justify-content-center vh-100 bg-body-tertiary position-relative">
+    <a href="index.php" class="btn position-absolute top-0 end-0 m-2">
+        <i class="bi bi-x-circle-fill" style="font-size: 2rem;"></i>
+    </a>
     <div class="container text-center">
-        <main class="form-signin w-50 m-auto">
+        <main class="form-signin shadow-lg p-4" style="background-color: #fff; border-radius: 10px;">
             <form method="POST" action="">
-                <img class="mb-3" src="images/Logo.png" alt="" width="50%" height="50%">
+                <img class="mb-3 img-fluid" src="images/Logo.png" alt="" style="max-width: 100%; height: auto;">
                 <h1 class="h5 mb-3 fw-normal"><span class="f1">Please sign in</span></h1>
 
                 <div class="form-floating mb-2">
