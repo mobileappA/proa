@@ -118,15 +118,15 @@ include_once("connectdb.php");
         </div>
     </section>
 
-    <div class="container border rounded-3 p-4 f1 mx-auto">
-        <h2 class="mb-4"><span class="f1">รายการสินค้า</span></h2>
+    <div class="container border rounded-3 p-4 f1">
+    <h2 class="mb-4"><span class="f1">รายการสินค้า</span></h2>
         <table id="myTable" class="table table-striped table-hover" style="width:100%">
             <thead>
                 <tr>
                     <th class="f1">แก้ไข</th>
                     <th class="f1">ลบ</th>
                     <th class="f1">Picture</th>
-                    <th class="f1">รหัสสินค้า</th>
+                     <th class="f1">รหัสสินค้า</th>
                     <th class="f1">ชื่อสินค้า</th>
                     <th class="f1">รายละเอียดสินค้า</th>
                     <th class="f1">ราคา</th>
@@ -135,7 +135,16 @@ include_once("connectdb.php");
             </thead>
             <tbody>
             <?php
-            // คิวรีข้อมูลสินค้า
+            $search = isset($_POST['search']) ? $_POST['search'] : '';
+            $sql = "SELECT * FROM product AS p
+                    LEFT JOIN product_type AS pt ON p.pt_id = pt.pt_id";
+
+            if ($search) {
+                $sql .= " WHERE p.p_name LIKE '%" . mysqli_real_escape_string($conn, $search) . "%'";
+            }
+            $sql .= " ORDER BY p.p_id ASC";
+            $rs = mysqli_query($conn, $sql);
+
             while ($data = mysqli_fetch_array($rs)) {
             ?>
                 <tr>
@@ -145,10 +154,15 @@ include_once("connectdb.php");
                         </a>
                     </td>
                     <td>
-                        <a href="a-delete.php?pid=<?= $data['p_id'];?>" onClick="return confirm('ยืนยันการลบ');" class="btn btn-danger btn-sm f1"><i class="bi bi-trash"></i> ลบ</a>
+                    <a href="a-delete.php?pid=<?= $data['p_id'];?>" onClick="return confirm('ยืนยันการลบ');" class="btn btn-danger btn-sm f1"><i class="bi bi-trash"></i> ลบ</a>
+
+
                     </td>
                     <td>
-                        <img src="images/<?= $data['p_picture1'];?>" width="100%" class="img-thumbnail">
+                        <img src="images/<?= $data['p_picture1'];?>?<?= time();?>" width="100%" class="img-thumbnail">
+                        <img src="images/<?= $data['p_picture2'];?>?<?= time();?>" width="100%" class="img-thumbnail">
+                        <img src="images/<?= $data['p_picture3'];?>?<?= time();?>" width="100%" class="img-thumbnail">
+                        <img src="images/<?= $data['p_picture4'];?>?<?= time();?>" width="100%" class="img-thumbnail">
                     </td>
                     <td class="f1"><?= $data['p_id'];?></td>
                     <td class="f1"><?= $data['p_name'];?></td>
@@ -163,7 +177,6 @@ include_once("connectdb.php");
         </table>
     </div>
 </main>
-
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
