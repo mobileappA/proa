@@ -26,7 +26,7 @@
     }
             @media (min-width: 992px) {
             .form-signin {
-                width: 50%; 
+                width: 100%; 
             }
         }
 </style>
