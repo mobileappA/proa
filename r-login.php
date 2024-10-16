@@ -37,7 +37,7 @@
     <div class="container text-center">
         <main class="form-signin w-50 m-auto">
             <form method="POST" action="">
-                <img class="mb-3" src="images/Logo.png" alt="" width="40%" height="40%">
+                <img class="mb-3" src="images/Logo.png" alt="" width="50%" height="50%">
                 <h1 class="h5 mb-3 fw-normal"><span class="f1">Admin-ร้านเขียนฝัน</span></h1>
 
                 <div class="form-floating mb-2">
