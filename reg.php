@@ -15,23 +15,30 @@
             font-weight: 500;
         }
         .form-signin {
-            background-color: white;
-            border-radius: 0.5rem;
-            padding: 2rem;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px; 
+        }
+  
+        @media (min-width: 992px) {
+            .form-signin {
+                max-width: 50%; 
+            }
         }
     </style>
 </head>
 
 <body class="d-flex align-items-center justify-content-center vh-100 bg-body-tertiary position-relative">
-    <a href="index.php" class="btn position-absolute top-0 end-0 m-2"><i class="bi bi-x-circle-fill" style="font-size: 2rem;"></i></a>
+    <a href="index.php" class="btn position-absolute top-0 end-0 m-2">
+        <i class="bi bi-x-circle-fill" style="font-size: 2rem;"></i>
+    </a>
     <div class="container text-center">
-        <main class="form-signin w-50 m-auto">
+        <main class="form-signin m-auto" style="max-width: 400px;">
             <form method="POST" action="">
-                <img class="mb-3" src="images/Logo.png" alt="" width="50%" height="50%">
+                <img class="mb-3 img-fluid" src="images/Logo.png" alt="" style="max-width: 100%; height: auto;">
                 <hr>
                 <h1 class="h5 mb-3 fw-normal"><span class="f1">สมัครสมาชิก</span></h1>
                 <hr>
+                
                 <div class="form-floating mb-2">
                     <input type="text" class="form-control" name="cfullname" id="floatinName" placeholder="Name" required>
                     <label for="floatinName"><span class="f1">ชื่อ-สกุล</span></label>
@@ -41,22 +48,23 @@
                     <input type="text" class="form-control" name="caddress" id="floatinAddress" placeholder="ที่อยู่" required>
                     <label for="floatinAddress"><span class="f1">ที่อยู่</span></label>
                 </div>
-                    
+
                 <div class="form-floating mb-2">
                     <input type="tel" class="form-control" name="cphonnumber" id="floatinPhoneNum" placeholder="เบอร์โทร" required>
                     <label for="floatinPhoneNum"><span class="f1">เบอร์โทร</span></label>
                 </div>
+
                 <div class="form-floating mb-2">
                     <input type="email" class="form-control" name="cemail" id="floatingInput" placeholder="name@example.com" required>
                     <label for="floatingInput"><span class="f1">Email address</span></label>
                 </div>
-                    
+
                 <div class="form-floating mb-3">
                     <input type="password" class="form-control" name="cpassword" id="floatingPassword" placeholder="Password" required>
                     <label for="floatingPassword"><span class="f1">Password</span></label>
                 </div>
-               
-                <button class="btn btn-primary w-100 py-2" type="submit" ><span class="f1">สมัครสมาชิก</span></button>
+
+                <button class="btn btn-primary w-100 py-2" type="submit"><span class="f1">สมัครสมาชิก</span></button>
             </form><br>
         </main>
     </div>

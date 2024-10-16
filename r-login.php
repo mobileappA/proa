@@ -23,20 +23,13 @@
             font-family: "Itim", cursive;
             font-weight: 500;
         }
-    .form-signin {
-        background-color: white;
-        border-radius: 0.5rem;
-        padding: 2rem;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    
         .form-signin {
             width: 100%;
         }
-    }
-        /* Adjustments for larger screens (desktops) */
+
         @media (min-width: 992px) {
             .form-signin {
-                width: 50%; /* Set a specific width for desktops */
+                width: 50%; 
             }
         }
     </style>
