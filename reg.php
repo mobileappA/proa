@@ -32,12 +32,12 @@
     </style>
 </head>
 
-<body class="d-flex align-items-center justify-content-center vh-100 bg-body-tertiary position-relative">
+<body class="d-flex align-items-center justify-content-center vh-100 bg-body-tertiary">
     <a href="index.php" class="btn position-absolute top-0 end-0 m-2">
         <i class="bi bi-x-circle-fill" style="font-size: 2rem;"></i>
     </a>
     <div class="container text-center">
-        <main class="form-signin m-auto p-6" style="max-width: 400px;">
+        <main class="form-signin m-auto shadow-lg p-4" style="max-width: 500px;">
             <form method="POST" action="">
                 <br>
                 <img class="mb-3 img-fluid" src="images/Logo.png" alt="" style="max-width: 100%; height: auto;">
