@@ -9,6 +9,9 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" rel="stylesheet"  crossorigin="anonymous">
 	<meta charset="utf-8">
 	<title>ร้านเขียนฝัน</title>
+    <link rel="icon" href="images/Logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
 </head>
 <style>
         body, h1, h2, h3, h4, h5, h6, label, input, textarea, select, button {

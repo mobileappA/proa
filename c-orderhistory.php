@@ -8,6 +8,7 @@ include_once("c-checklogin.php");
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ประวัติการสั่งซื้อ</title>
+    <link rel="icon" href="images/Logo.png" type="image/x-icon">
     <!--icons-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 

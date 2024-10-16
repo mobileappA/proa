@@ -7,6 +7,7 @@ echo ($_SESSION['aname']);
 <!doctype html>
 <html>
 <head>
+<link rel="icon" href="images/Logo.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <meta charset="utf-8">
     <title>ร้านเขียนฝัน</title>

@@ -6,6 +6,7 @@ include_once("connectdb.php");
 <!doctype html>
 <html lang="th">
 <head>
+<link rel="icon" href="images/Logo.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
     <meta charset="utf-8">

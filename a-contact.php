@@ -7,6 +7,7 @@ include_once("r-checklogin.php");
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ร้านเขียนฝัน</title>
+    <link rel="icon" href="images/Logo.png" type="image/x-icon">
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
