@@ -54,8 +54,8 @@ if (!$data) {
 <body class="d-flex align-items-center justify-content-center vh-100 bg-body-tertiary position-relative">
     <a href="index.php" class="btn position-absolute top-0 end-0 m-2"><i class="bi bi-x-circle-fill" style="font-size: 2rem;"></i></a>
     <div class="container text-center">
-        <main class="form-signin m-auto">
-            <form method="POST" action=""><br><br>
+        <main class="form-signin m-auto"><br><br>
+            <form method="POST" action="">
                 <img class="mb-3" src="images/Logo.png" alt="" style="max-width: 100%; height: auto;" >
                 <hr>
                 <h1 class="h5 mb-3 fw-normal"><span class="f1">ตั้งค่าบัญชีผู้ใช้</span></h1>
