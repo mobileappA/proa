@@ -41,8 +41,8 @@
 
 <body>
 <a href="a-manageorder.php" class="btn position-absolute top-0 end-0 m-2"><i class="bi bi-x-circle-fill" style="font-size: 2rem;"></i></a>
-    <div class="container my-5">
-		<h1 class="text-center"><span class="f1">หมายเลขคำสั่งซื้อ</span><?=$_GET['a'];?></h1>
+    <div class="container-fluid">
+		<h1 class="text-center"><span class="f1">หมายเลขคำสั่งซื้อ<?=$_GET['a'];?></span></h1>
         <table class="table table-info table-striped table-hover mt-4">
             <thead class="table-danger">
                 <tr>
