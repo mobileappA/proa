@@ -22,29 +22,35 @@ $data1 = mysqli_fetch_array($rs1);
             font-family: "Itim", cursive;
             font-weight: 500;
         }
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* ให้ฟอร์มอยู่กลางจอ */
+        }
     </style>
 </head>
 
 <body>
-<center><h1><span class="f1">เขียนฝัน-แก้ไขประเภทสินค้า</span></h1></center>
+<center><h1>เขียนฝัน-แก้ไขประเภทสินค้า</h1></center>
 
-<form class="form-horizontal f1" method="post" action="" enctype="multipart/form-data">
+<form class="form-container" method="post" action="" enctype="multipart/form-data">
     <fieldset>
         <div class="form-group">
-            <label class="col-md-4 control-label f1" for="textinput">ชื่อประเภทสินค้า</label>
+            <label class="col-md-4 control-label" for="textinput">ชื่อประเภทสินค้า</label>
             <div class="col-md-4">
                 <input type="text" name="ptname" style="width: 300px" required autofocus value="<?= htmlspecialchars($data1['pt_name']); ?>"><br>
             </div>
         </div>
 
         <div class="mb-3">
-            <label class="col-md-4 control-label f1" for="file">รูปภาพ</label>
+            <label class="col-md-4 control-label " for="file">รูปภาพ</label>
             <div class="col-md-4">
                 <input class="form-control" name="pimg" type="file" id="formFileMultiple" style="width: 300px;">
             </div>
         </div>
           <br><br>
-		<button type="submit" name="Submit" class="btn btn-success center-block f1"> บันทึก </button>
+		<button type="submit" name="Submit" class="btn btn-success center-block "> บันทึก </button>
         
     </fieldset>
 </form>

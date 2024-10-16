@@ -21,12 +21,18 @@ $data1 = mysqli_fetch_array($rs1);
             font-family: "Itim", cursive;
             font-weight: 500;
         }
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* ให้ฟอร์มอยู่กลางจอ */
+        }
     </style>
 <body>
 <center><h1>เขียนฝัน - แก้ไขข้อมูลลูกค้า</h1></center>
 <br><br>
 
-<form class="form-horizontal" method="post" action="" enctype="multipart/form-data">
+<form class="form-container" method="post" action="" enctype="multipart/form-data">
     <fieldset>
         <div class="form-group">
             <label class="col-md-4 control-label" for="textinput">ชื่อลูกค้า</label>

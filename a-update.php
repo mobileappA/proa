@@ -23,30 +23,36 @@ $data1 = mysqli_fetch_array($rs1);
             font-family: "Itim", cursive;
             font-weight: 500;
         }
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* ให้ฟอร์มอยู่กลางจอ */
+        }
     </style>
 </head>
 
 <body>
-<center><h1><span class="f1">เขียนฝัน - แก้ไขสินค้า</span></h1></center>
+<center><h1><span >เขียนฝัน - แก้ไขสินค้า</h1></center>
 
-<form class="form-horizontal f1" method="post" action="" enctype="multipart/form-data">
+<form class="form-container" method="post" action="" enctype="multipart/form-data">
     <fieldset>
         <div class="form-group">
-            <label class="col-md-4 control-label f1" for="textinput">ชื่อสินค้า</label>
+            <label class="col-md-4 control-label " for="textinput">ชื่อสินค้า</label>
             <div class="col-md-4">
                 <input type="text" name="pname" style="width: 300px" required autofocus value="<?= htmlspecialchars($data1['p_name']); ?>"><br>
             </div>
         </div>
 
         <div class="form-group">
-            <label class="col-md-4 control-label f1" for="textarea">รายละเอียดสินค้า</label>
+            <label class="col-md-4 control-label " for="textarea">รายละเอียดสินค้า</label>
             <div class="col-md-4">
                 <textarea name="pdetail" rows="5" cols="50" required><?= htmlspecialchars($data1['p_detail']); ?></textarea><br>
             </div>
         </div>
 
         <div class="form-group">
-            <label class="col-md-4 control-label f1" for="number">ราคา</label>
+            <label class="col-md-4 control-label " for="number">ราคา</label>
             <div class="col-md-4">
                 <input type="number" name="pprice" required value="<?= htmlspecialchars($data1['p_price']); ?>" style="width: 200px;" step="0.01" min="0"><br>
             </div>
@@ -55,7 +61,7 @@ $data1 = mysqli_fetch_array($rs1);
         <!-- ฟอร์มอัปโหลดรูปภาพค้าบบบ ทำให้มันลูปสร้าง 4 รอบ-->
         <?php for ($i = 1; $i <= 4; $i++) { ?>
         <div class="form-group">
-            <label class="col-md-4 control-label f1" for="file">รูปภาพที่ <?= $i ?></label>
+            <label class="col-md-4 control-label " for="file">รูปภาพที่ <?= $i ?></label>
             <div class="col-md-4">
                 <input class="form-control" name="pimg<?= $i ?>" type="file">
                 <input type="hidden" name="ppicture<?= $i ?>" value="<?= htmlspecialchars($data1["p_picture$i"]); ?>">
@@ -64,9 +70,9 @@ $data1 = mysqli_fetch_array($rs1);
         <?php } ?>
         
         <div class="form-group">
-            <label class="col-md-4 control-label f1" for="pt">ประเภทสินค้า</label>
+            <label class="col-md-4 control-label " for="pt">ประเภทสินค้า</label>
             <div class="col-md-4">
-                <select name="pt" class="form-select f1">
+                <select name="pt" class="form-select ">
                     <?php
                     $sql2 = "SELECT * FROM product_type ORDER BY pt_name ASC";
                     $rs2 = mysqli_query($conn, $sql2);
@@ -80,7 +86,7 @@ $data1 = mysqli_fetch_array($rs1);
             </div>
         </div>
         <br><br>
-        <button type="submit" name="Submit" class="btn btn-success center-block f1">บันทึก</button>
+        <button type="submit" name="Submit" class="btn btn-success center-block ">บันทึก</button>
     </fieldset>
 </form>
 
