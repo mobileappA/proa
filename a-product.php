@@ -62,7 +62,8 @@ include_once("connectdb.php");
 	background-color: #48D1CC; /* สีพื้นหลังของ Navbar */
     }
     .navbar .nav-link {
-        color: #20c997; /* สีข้อความใน Navbar */
+        color: #20c997;
+        width: 100%;
     }
     </style>
 </head>
@@ -70,7 +71,7 @@ include_once("connectdb.php");
 
 <header data-bs-theme="#8470FF">
     <div class="collapse text-bg-#8470FF" id="navbarHeader" style="background-color:#48D1CC;">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-8 col-md-7 py-4">
                     <h4 class="f1">About</h4>
@@ -105,7 +106,7 @@ include_once("connectdb.php");
 </header>
 
 <main>
-    <section class="py-5 text-center container">
+    <section class="py-5 text-center container-fluid">
         <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
                 <h1 class="fw-light f1">ร้านเขียนฝัน</h1>
@@ -118,7 +119,7 @@ include_once("connectdb.php");
         </div>
     </section>
 
-    <div class="container border rounded-3 p-4 f1">
+    <div class="container-fluid border rounded-3 p-4 f1">
     <h2 class="mb-4"><span class="f1">รายการสินค้า</span></h2>
         <table id="myTable" class="table table-striped table-hover" style="width:100%">
             <thead>
