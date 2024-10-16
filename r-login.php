@@ -26,7 +26,13 @@
         .form-signin {
             width: 100%;
         }
+        .shadow-lg {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);/* เพิ่มความโค้งมนให้กับฟอร์ม */
+        }
 
+        .form-signin {
+            border-radius: 10px;
+        }
         @media (min-width: 992px) {
             .form-signin {
                 width: 50%; 
