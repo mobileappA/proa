@@ -20,6 +20,8 @@
             border-radius: 10px;
             padding: 2rem;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin: 20px auto;
         }
   
         @media (min-width: 992px) {
