@@ -16,20 +16,14 @@ echo ($_SESSION['aname']);
             font-family: "Itim", cursive;
             font-weight: 500;
         }
-        .form-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh; /* ให้ฟอร์มอยู่กลางจอ */
-        }
-      
+
     </style>
 </head>
 
 <body>
 <center><h1><span class="f1">เขียนฝัน-เพิ่มประเภทสินค้า</span></h1></center>
 
-<form class="form-container" method="post" action="" enctype="multipart/form-data">
+<form class="form-horizontal" method="post" action="" enctype="multipart/form-data">
     <fieldset>
         <div class="form-group">
             <label class="col-md-4 control-label f1" for="textinput">ชื่อประเภทสินค้า</label>
