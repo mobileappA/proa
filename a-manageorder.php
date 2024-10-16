@@ -70,7 +70,7 @@ include_once("r-checklogin.php");
 
 <header data-bs-theme="#8470FF">
     <div class="collapse text-bg-#8470FF" id="navbarHeader" style="background-color:#48D1CC;">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-8 col-md-7 py-4">
                     <h4 class="f1">About</h4>
