@@ -62,11 +62,12 @@
                     <input type="password" class="form-control" name="apassword" placeholder="Password" required>
                     <label for="floatingPassword"><span class="f1">Password</span></label>
                 </div>
+                <button class="btn btn-primary w-100 py-2" type="submit" name="Submit"><span class="f1">Sign in</span></button>
             </form>
         </main>
     </div>
                
-<button class="btn btn-primary w-100 py-2" type="submit" name="Submit"><span class="f1">Sign in</span></button>
+
 <?php
 if (isset($_POST['Submit'])) {
     $sql = "SELECT * FROM admin WHERE a_username = '{$_POST['ausername']}' AND a_password = '".md5($_POST['apassword'])."'";
