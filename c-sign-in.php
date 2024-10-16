@@ -32,12 +32,12 @@
 </style>
 </head>
 
-<body class="d-flex align-items-center justify-content-center vh-100 bg-body-tertiary position-relative">
+<body class="d-flex align-items-center justify-content-center vh-100 bg-body-tertiary">
     <a href="index.php" class="btn position-absolute top-0 end-0 m-2">
         <i class="bi bi-x-circle-fill" style="font-size: 2rem;"></i>
     </a>
-    <div class="container text-center">
-        <main class="form-signin shadow-lg p-4" style="background-color: #fff; border-radius: 10px;">
+    <div class="container">
+        <main class="form-signin mx-auto">
             <form method="POST" action="">
                 <img class="mb-3 img-fluid" src="images/Logo.png" alt="" style="max-width: 100%; height: auto;">
                 <h1 class="h5 mb-3 fw-normal">Please sign in</h1>
@@ -51,7 +51,7 @@
                     <label for="floatingPassword">Password</label>
                 </div>
                
-                <button class="btn btn-primary w-100 py-2" type="submit" name="Submit"><span class="f1">Sign in</span></button>
+                <button class="btn btn-primary w-100 py-2" type="submit" name="Submit">Sign in</button>
             </form>
             <br>
             <div class="text-center">
@@ -59,7 +59,6 @@
             </div>
         </main>
     </div>
-
     <?php
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
