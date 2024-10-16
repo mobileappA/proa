@@ -17,7 +17,7 @@
         .form-signin {
             width: 100%;
             max-width: 400px; 
-            border-radius: 0.5rem;
+            border-radius: 10px;
             padding: 2rem;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
