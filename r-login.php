@@ -28,26 +28,43 @@
         border-radius: 0.5rem;
         padding: 2rem;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
+        .form-signin {
+            width: 100%;
+        }
     }
-</style>
+        /* Adjustments for larger screens (desktops) */
+        @media (min-width: 992px) {
+            .form-signin {
+                width: 50%; /* Set a specific width for desktops */
+            }
+        }
+    </style>
+
 </head>
 
 <body class="d-flex align-items-center justify-content-center vh-100 bg-body-tertiary">
-    <a href="index.php" class="btn position-absolute top-0 end-0 m-2"><i class="bi bi-x-circle-fill" style="font-size: 2rem;"></i></a>
+    <a href="index.php" class="btn position-absolute top-0 end-0 m-2">
+        <i class="bi bi-x-circle-fill" style="font-size: 2rem;"></i>
+    </a>
     <div class="container text-center">
-        <main class="form-signin w-50 m-auto">
+        <main class="form-signin m-auto" style="max-width: 500px;">
             <form method="POST" action="">
-                <img class="mb-3" src="images/Logo.png" alt="" width="50%" height="50%">
+                <img class="mb-3 img-fluid" src="images/Logo.png" alt="Logo" style="max-width: 100%; height: auto;">
                 <h1 class="h5 mb-3 fw-normal"><span class="f1">Admin-ร้านเขียนฝัน</span></h1>
 
                 <div class="form-floating mb-2">
-                     <input type="text" class="form-control" name="ausername" placeholder="Username" autofocus required>
+                    <input type="text" class="form-control" name="ausername" placeholder="Username" autofocus required>
                     <label for="floatingInput"><span class="f1">Username</span></label>
                 </div>
-				<div class="form-floating mb-2">
-                <input type="password" class="form-control" name="apassword" placeholder="Password" required>
-            <label for="floatingPassword">Password</label>
+
+                <div class="form-floating mb-2">
+                    <input type="password" class="form-control" name="apassword" placeholder="Password" required>
+                    <label for="floatingPassword"><span class="f1">Password</span></label>
                 </div>
+            </form>
+        </main>
+    </div>
                
 <button class="btn btn-primary w-100 py-2" type="submit" name="Submit"><span class="f1">Sign in</span></button>
 <?php
