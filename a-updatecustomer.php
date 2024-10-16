@@ -35,7 +35,7 @@ $data1 = mysqli_fetch_array($rs1);
 <center><h1>เขียนฝัน - แก้ไขข้อมูลลูกค้า</h1></center>
 <br><br>
 
-<form class="form-container" method="post" action="" enctype="multipart/form-data">
+<form class="form-horizontal" method="post" action="" enctype="multipart/form-data">
     <fieldset>
         <div class="form-group">
             <label class="col-md-4 control-label" for="textinput">ชื่อลูกค้า</label>
@@ -82,18 +82,11 @@ $data1 = mysqli_fetch_array($rs1);
             </div>
         </div>
         <br>
-
-        
-        <br>
-			<br>
-
      
-        <br><br>
+        <br>
         <button type="submit" name="Submit" class="btn btn-success center-block"> บันทึก </button>
     </fieldset>
 </form>
-<hr><hr>
-
 <?php
     if (isset($_POST['Submit'])) {
         // รับค่าจากฟอร์ม
