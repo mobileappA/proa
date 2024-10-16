@@ -28,62 +28,73 @@ $data1 = mysqli_fetch_array($rs1);
 </head>
 
 <body>
-<center><h1><span >เขียนฝัน - แก้ไขสินค้า</h1></center>
+    <div class="container">
+        <center><h1 class="f1">เขียนฝัน - แก้ไขสินค้า</h1></center>
 
-<form class="form-horizontal text-center" method="post" action="" enctype="multipart/form-data">
-    <fieldset>
-        <div class="form-group text-center">
-            <label class="col-md-4 control-label" for="textinput">ชื่อสินค้า</label>
-            <div class="col-md-4 mx-auto">
-                <input type="text" name="pname" style="width: 300px" required autofocus value="<?= htmlspecialchars($data1['p_name']); ?>"><br>
-            </div>
-        </div>
+        <form class="form-horizontal text-center" method="post" action="" enctype="multipart/form-data">
+            <fieldset>
+                <!-- ชื่อสินค้า -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="textinput">ชื่อสินค้า</label>
+                    <div class="col-md-4">
+                        <input type="text" name="pname" class="form-control" required autofocus value="<?= htmlspecialchars($data1['p_name']); ?>">
+                    </div>
+                </div>
 
-        <div class="form-group text-center">
-            <label class="col-md-4 control-label" for="textarea">รายละเอียดสินค้า</label>
-            <div class="col-md-4 mx-auto">
-                <textarea name="pdetail" rows="5" cols="50" required><?= htmlspecialchars($data1['p_detail']); ?></textarea><br>
-            </div>
-        </div>
+                <!-- รายละเอียดสินค้า -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="textarea">รายละเอียดสินค้า</label>
+                    <div class="col-md-4">
+                        <textarea name="pdetail" class="form-control" rows="5" required><?= htmlspecialchars($data1['p_detail']); ?></textarea>
+                    </div>
+                </div>
 
-        <div class="form-group text-center">
-            <label class="col-md-4 control-label" for="number">ราคา</label>
-            <div class="col-md-4 mx-auto">
-                <input type="number" name="pprice" required value="<?= htmlspecialchars($data1['p_price']); ?>" style="width: 200px;" step="0.01" min="0"><br>
-            </div>
-        </div>
+                <!-- ราคา -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="number">ราคา</label>
+                    <div class="col-md-4">
+                        <input type="number" name="pprice" class="form-control" required step="0.01" min="0" value="<?= htmlspecialchars($data1['p_price']); ?>">
+                    </div>
+                </div>
 
-        <!-- ฟอร์มอัปโหลดรูปภาพ ลูปสร้าง 4 รอบ -->
-        <?php for ($i = 1; $i <= 4; $i++) { ?>
-        <div class="form-group text-center">
-            <label class="col-md-4 control-label" for="file">รูปภาพที่ <?= $i ?></label>
-            <div class="col-md-4 mx-auto">
-                <input class="form-control" name="pimg<?= $i ?>" type="file">
-                <input type="hidden" name="ppicture<?= $i ?>" value="<?= htmlspecialchars($data1["p_picture$i"]); ?>">
-            </div>
-        </div>
-        <?php } ?>
+                <!-- รูปภาพ -->
+                <?php for ($i = 1; $i <= 4; $i++) { ?>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="file">รูปภาพที่ <?= $i ?></label>
+                    <div class="col-md-4">
+                        <input class="form-control" name="pimg<?= $i ?>" type="file">
+                        <input type="hidden" name="ppicture<?= $i ?>" value="<?= htmlspecialchars($data1["p_picture$i"]); ?>">
+                    </div>
+                </div>
+                <?php } ?>
 
-        <div class="form-group text-center">
-            <label class="col-md-4 control-label" for="pt">ประเภทสินค้า</label>
-            <div class="col-md-4 mx-auto">
-                <select name="pt" class="form-select">
-                    <?php
-                    $sql2 = "SELECT * FROM product_type ORDER BY pt_name ASC";
-                    $rs2 = mysqli_query($conn, $sql2);
-                    while ($data2 = mysqli_fetch_array($rs2)) {
-                    ?>
-                        <option value="<?= htmlspecialchars($data2['pt_id']); ?>" <?=($data1['pt_id'] == $data2['pt_id']) ? "selected" : "";?> >
-                            <?= htmlspecialchars($data2['pt_name']); ?>
-                        </option>
-                    <?php } ?>
-                </select>
-            </div>
-        </div>
-        <br><br>
-        <button type="submit" name="Submit" class="btn btn-success center-block">บันทึก</button>
-    </fieldset>
-</form>
+                <!-- ประเภทสินค้า -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="pt">ประเภทสินค้า</label>
+                    <div class="col-md-4">
+                        <select name="pt" class="form-control">
+                            <?php
+                            $sql2 = "SELECT * FROM product_type ORDER BY pt_name ASC";
+                            $rs2 = mysqli_query($conn, $sql2);
+                            while ($data2 = mysqli_fetch_array($rs2)) {
+                            ?>
+                                <option value="<?= htmlspecialchars($data2['pt_id']); ?>" <?=($data1['pt_id'] == $data2['pt_id']) ? "selected" : "";?>><?= htmlspecialchars($data2['pt_name']); ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- ปุ่มบันทึก -->
+                <div class="form-group">
+                    <div class="col-md-4 col-md-offset-4">
+                        <button type="submit" name="Submit" class="btn btn-success">บันทึก</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</body>
+
 
 <?php
 if (isset($_POST['Submit'])) {

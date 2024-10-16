@@ -82,7 +82,7 @@ include_once("connectdb.php");
                 </div>
             </fieldset>
         </form>
-        <hr>
+        
 
         <?php
         if (isset($_POST['Submit'])) {

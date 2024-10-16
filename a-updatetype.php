@@ -27,29 +27,38 @@ $data1 = mysqli_fetch_array($rs1);
 </head>
 
 <body>
-<center><h1>เขียนฝัน-แก้ไขประเภทสินค้า</h1></center>
+    <div class="container">
+        <center><h1>เขียนฝัน - เพิ่มประเภทสินค้า</h1></center>
 
-<form class="form-horizontal" method="post" action="" enctype="multipart/form-data">
-    <fieldset>
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="textinput">ชื่อประเภทสินค้า</label>
-            <div class="col-md-4">
-                <input type="text" name="ptname" style="width: 300px" required autofocus value="<?= htmlspecialchars($data1['pt_name']); ?>"><br>
-            </div>
-        </div>
+        <form class="form-horizontal text-center" method="post" action="" enctype="multipart/form-data">
+            <fieldset>
+                <!-- ชื่อประเภทสินค้า -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="textinput">ชื่อประเภทสินค้า</label>
+                    <div class="col-md-4">
+                        <input type="text" name="ptname" class="form-control" required autofocus value="<?= htmlspecialchars($data1['pt_name']); ?>">
+                    </div>
+                </div>
 
-        <div class="mb-3">
-            <label class="col-md-4 control-label " for="file">รูปภาพ</label>
-            <div class="col-md-4">
-                <input class="form-control" name="pimg" type="file" id="formFileMultiple" style="width: 300px;">
-            </div>
-        </div>
-          <br><br>
-		<button type="submit" name="Submit" class="btn btn-success center-block "> บันทึก </button>
-        
-    </fieldset>
-</form>
-<hr><hr>
+                <!-- รูปภาพ -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="file">รูปภาพ</label>
+                    <div class="col-md-4">
+                        <input class="form-control" name="pimg" type="file" id="formFileMultiple">
+                    </div>
+                </div>
+
+                <!-- ปุ่มบันทึก -->
+                <div class="form-group">
+                    <div class="col-md-4 col-md-offset-4">
+                        <button type="submit" name="Submit" class="btn btn-success">บันทึก</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</body>
+
 
 <?php
 if (isset($_POST['Submit'])) {
