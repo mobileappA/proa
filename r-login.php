@@ -47,7 +47,7 @@
         <i class="bi bi-x-circle-fill" style="font-size: 2rem;"></i>
     </a>
     <div class="container text-center">
-        <main class="form-signin m-auto shadow-lg " style="max-width: 500px;">
+        <main class="form-signin m-auto shadow-lg p-4" style="max-width: 500px;">
             <form method="POST" action="">
                 <img class="mb-3 img-fluid" src="images/Logo.png" alt="Logo" style="max-width: 100%; height: auto;">
                 <h1 class="h5 mb-3 fw-normal"><span class="f1">Admin-ร้านเขียนฝัน</span></h1>
