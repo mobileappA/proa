@@ -26,7 +26,7 @@ include_once("r-checklogin.php");
     $('#myTable').DataTable({
         "order": [[0, "desc"]] // จัดเรียงจากมากไปน้อย
     });
-});
+    });
     </script>
 
      <style>

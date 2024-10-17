@@ -31,7 +31,7 @@ $data1 = mysqli_fetch_array($rs1);
 
 <body>
     <div class="container">
-        <center><h1 class="f1">เขียนฝัน - แก้ไขสินค้า</h1></center>
+        <center><h1 >เขียนฝัน - แก้ไขสินค้า</h1></center>
 
         <form class="form-horizontal text-center" method="post" action="" enctype="multipart/form-data">
             <fieldset>

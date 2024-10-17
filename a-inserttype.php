@@ -22,26 +22,26 @@ echo ($_SESSION['aname']);
 </head>
 
 <body>
-<center><h1><span class="f1">เขียนฝัน-เพิ่มประเภทสินค้า</span></h1></center>
+<center><h1>เขียนฝัน-เพิ่มประเภทสินค้า</h1></center>
 
 <form class="form-horizontal" method="post" action="" enctype="multipart/form-data">
     <fieldset>
         <div class="form-group">
-            <label class="col-md-4 control-label f1" for="textinput">ชื่อประเภทสินค้า</label>
+            <label class="col-md-4 control-label " for="textinput">ชื่อประเภทสินค้า</label>
             <div class="col-md-4">
                 <input id="textinput" name="ptname" type="text" class="form-control input-md" required autofocus><br>
             </div>
         </div>
 
         <div class="form-group">
-            <label class="col-md-4 control-label f1" for="formFileMultiple">รูปภาพ</label>
+            <label class="col-md-4 control-label " for="formFileMultiple">รูปภาพ</label>
             <div class="col-md-4">
-                <input class="form-control f1" name="pimg" type="file" id="formFileMultiple" style="width: 300px;">
+                <input class="form-control " name="pimg" type="file" id="formFileMultiple" style="width: 300px;">
             </div>
         </div>
         <br>
 
-        <button type="submit" name="Submit" class="btn btn-success center-block f1">เพิ่ม</button>
+        <button type="submit" name="Submit" class="btn btn-success center-block">เพิ่ม</button>
     </fieldset>
 </form>
 <hr>

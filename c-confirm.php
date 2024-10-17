@@ -23,7 +23,7 @@ if (!$data) {
 }
 ?>
 <?php
-// ก่อนที่จะเข้าสู่ HTML เช้คข้อมูลที่อยู่
+//  เช้คข้อมูลที่อยู่ว่ามีกี่ที่อยู่
 $show_address1 = !empty($data['c_address1']);
 $show_address2 = !empty($data['c_address2']);
 $show_address3 = !empty($data['c_address3']);
@@ -63,18 +63,18 @@ $show_address3 = !empty($data['c_address3']);
 
             <img class="mb-3" src="images/Logo.png" alt="" style="max-width: 100%; height: auto;" >
                 <hr>
-                <h1 class="h5 mb-3 fw-normal"><span class="f1">ยืนยันการสั่งซื้อ</span></h1>
+                <h1 class="h5 mb-3 fw-normal">ยืนยันการสั่งซื้อ</h1>
                 <hr>
                 <div class="form-floating mb-2">
                     <input type="text" class="form-control" name="cfullname" value="<?=$data['c_fullname'];?>" id="floatinName" placeholder="Name" required readonly>
-                    <label for="floatinName"><span class="f1">ชื่อ-สกุล</span></label>
+                    <label for="floatinName">ชื่อ-สกุล</label>
                 </div>
 
                 <div class="form-floating mb-2 d-flex align-items-center">
     <?php if ($show_address1): ?>
         <input type="text" class="form-control" name="caddress1" value="<?= htmlspecialchars($data['c_address1']); ?>" id="floatinAddress1" placeholder="ที่อยู่" required readonly>
         <input type="radio" class="form-check-input ms-2" name="address" id="radioAddress1" value="1" <?php echo isset($data['c_address1']) ? 'checked' : ''; ?>>
-        <label for="radioAddress1" class="ms-1"><span class="f1">ที่อยู่1</span></label>
+        <label for="radioAddress1" class="ms-1">ที่อยู่1</label>
     <?php endif; ?>
 </div>
 
@@ -82,23 +82,23 @@ $show_address3 = !empty($data['c_address3']);
     <?php if ($show_address2): ?>
         <input type="text" class="form-control" name="caddress2" value="<?= htmlspecialchars($data['c_address2']); ?>" id="floatinAddress2" placeholder="ที่อยู่" readonly>
         <input type="radio" class="form-check-input ms-2" name="address" id="radioAddress2" value="2" <?php echo isset($data['c_address2']) ?  : ''; ?>>
-        <label for="radioAddress2" class="ms-1"><span class="f1">ที่อยู่2</span></label>
+        <label for="radioAddress2" class="ms-1">ที่อยู่2</label>
     <?php endif; ?>
 </div>
 				<div class="form-floating mb-2 d-flex align-items-center">
     <?php if ($show_address3): ?>
         <input type="text" class="form-control" name="caddress2" value="<?= htmlspecialchars($data['c_address3']); ?>" id="floatinAddress3" placeholder="ที่อยู่" readonly>
         <input type="radio" class="form-check-input ms-2" name="address" id="radioAddress3" value="3" <?php echo isset($data['c_address3']) ? : ''; ?>>
-        <label for="radioAddress3" class="ms-1"><span class="f1">ที่อยู่3</span></label>
+        <label for="radioAddress3" class="ms-1">ที่อยู่3</label>
     <?php endif; ?>
 </div>
 
                 <div class="form-floating mb-2">
                     <input type="text" class="form-control" name="cphonnumber" value="<?=$data['c_phonnumber'];?>" id="floatinPhoneNum" placeholder="เบอร์โทร" required readonly>
-                    <label for="floatinPhoneNum"><span class="f1">เบอร์โทร</span></label>
+                    <label for="floatinPhoneNum">เบอร์โทร</label>
                 </div>
 
-                <button class="btn btn-primary w-100 py-2" type="submit" name="Submit"><span class="f1">ยืนยันการสั่งซื้อ</span></button>
+                <button class="btn btn-primary w-100 py-2" type="submit" name="Submit">ยืนยันการสั่งซื้อ</button>
             </form><br>
         </main>
     </div>
@@ -128,7 +128,7 @@ if (isset($_POST['Submit'])) {
 
     $net_total = $total - $discount;
 
-    // ตรวจสอบค่าที่อยู่ที่ลูกค้าเลือก
+    // ตรวจสอบว่าลูกค้าเลือกที่อยู่ไหน
     $selected_address = '';
     if ($_POST['address'] == '1') {
         $selected_address = $data['c_address1'];
@@ -138,17 +138,17 @@ if (isset($_POST['Submit'])) {
         $selected_address = $data['c_address3'];
     }
 
-    // แทรกข้อมูลการสั่งซื้อในตาราง orders โดยไม่ใส่ค่าใน oid
+    // เพิ่มข้อมูลการสั่งซื้อในตาราง orders
     $sql = "INSERT INTO `orders` (ototal, odate, c_id, c_address, status) 
             VALUES ('$net_total', CURRENT_TIMESTAMP, '{$_SESSION['cid']}', '$selected_address', 'สั่งซื้อสินค้าสำเร็จ');";
 
     // รันคำสั่ง SQL
     mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
-    // Get last inserted order id
+    
     $id = mysqli_insert_id($conn);
 
-    // เพิ่มข้อมูลในตาราง orders_detail
+    
     foreach ($_SESSION['sid'] as $key => $pid) {
         $sql2 = "INSERT INTO orders_detail (oid, pid,item) 
                  VALUES ('$id', '{$_SESSION['sid'][$key]}', '{$_SESSION['sitem'][$key]}');";

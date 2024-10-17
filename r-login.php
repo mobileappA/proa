@@ -51,18 +51,18 @@
         <main class="form-signin m-auto shadow-lg p-4" style="max-width: 500px;">
             <form method="POST" action="">
                 <img class="mb-3 img-fluid" src="images/Logo.png" alt="Logo" style="max-width: 100%; height: auto;">
-                <h1 class="h5 mb-3 fw-normal"><span class="f1">Admin-ร้านเขียนฝัน</span></h1>
+                <h1 class="h5 mb-3 fw-normal">Admin-ร้านเขียนฝัน</h1>
 
                 <div class="form-floating mb-2">
                     <input type="text" class="form-control" name="ausername" placeholder="Username" autofocus required>
-                    <label for="floatingInput"><span class="f1">Username</span></label>
+                    <label for="floatingInput">Username</label>
                 </div>
 
                 <div class="form-floating mb-2">
                     <input type="password" class="form-control" name="apassword" placeholder="Password" required>
-                    <label for="floatingPassword"><span class="f1">Password</span></label>
+                    <label for="floatingPassword">Password</label>
                 </div>
-                <button class="btn btn-primary w-100 py-2" type="submit" name="Submit"><span class="f1">Sign in</span></button>
+                <button class="btn btn-primary w-100 py-2" type="submit" name="Submit">Sign in</button>
             </form>
         </main>
     </div>

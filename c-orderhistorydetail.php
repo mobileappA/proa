@@ -34,7 +34,7 @@ include_once("c-checklogin.php");
         }
 
         body {
-            background-color: #f8f9fa; /* อาจจะเปลี่ยนสีพื้นหลัง */
+            background-color: #f8f9fa; 
         }
     </style>
 	

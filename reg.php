@@ -43,35 +43,35 @@
                 <br>
                 <img class="mb-3 img-fluid" src="images/Logo.png" alt="" style="max-width: 100%; height: auto;">
                 <hr>
-                <h1 class="h5 mb-3 fw-normal"><span class="f1">สมัครสมาชิก</span></h1>
+                <h1 class="h5 mb-3 fw-normal">สมัครสมาชิก</h1>
                 <hr>
                 
                 <div class="form-floating mb-2">
                     <input type="text" class="form-control" name="cfullname" id="floatinName" placeholder="Name" required>
-                    <label for="floatinName"><span class="f1">ชื่อ-สกุล</span></label>
+                    <label for="floatinName">ชื่อ-สกุล</label>
                 </div>
 
                 <div class="form-floating mb-2">
                     <input type="text" class="form-control" name="caddress" id="floatinAddress" placeholder="ที่อยู่" required>
-                    <label for="floatinAddress"><span class="f1">ที่อยู่</span></label>
+                    <label for="floatinAddress">ที่อยู่</label>
                 </div>
 
                 <div class="form-floating mb-2">
                     <input type="tel" class="form-control" name="cphonnumber" id="floatinPhoneNum" placeholder="เบอร์โทร" required>
-                    <label for="floatinPhoneNum"><span class="f1">เบอร์โทร</span></label>
+                    <label for="floatinPhoneNum">เบอร์โทร</label>
                 </div>
 
                 <div class="form-floating mb-2">
                     <input type="email" class="form-control" name="cemail" id="floatingInput" placeholder="name@example.com" required>
-                    <label for="floatingInput"><span class="f1">Email address</span></label>
+                    <label for="floatingInput">Email address</label>
                 </div>
 
                 <div class="form-floating mb-3">
                     <input type="password" class="form-control" name="cpassword" id="floatingPassword" placeholder="Password" required>
-                    <label for="floatingPassword"><span class="f1">Password</span></label>
+                    <label for="floatingPassword">Password</label>
                 </div>
 
-                <button class="btn btn-primary w-100 py-2" type="submit"><span class="f1">สมัครสมาชิก</span></button>
+                <button class="btn btn-primary w-100 py-2" type="submit">สมัครสมาชิก</button>
             </form><br>
         </main>
     </div>

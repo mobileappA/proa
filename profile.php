@@ -59,38 +59,38 @@ if (!$data) {
             <form method="POST" action=""><br><br>
                 <img class="mb-3" src="images/Logo.png" alt="" style="max-width: 100%; height: auto;" >
                 <hr>
-                <h1 class="h5 mb-3 fw-normal"><span class="f1">ข้อมูลบัญชีผู้ใช้</span></h1>
+                <h1 class="h5 mb-3 fw-normal">ข้อมูลบัญชีผู้ใช้</h1>
                 <hr>
                 <div class="form-floating mb-2">
                     <input type="text" class="form-control" name="cfullname" value="<?=$data['c_fullname'];?>" id="floatinName" placeholder="Name" readonly>
-                    <label for="floatinName"><span class="f1">ชื่อ-สกุล</span></label>
+                    <label for="floatinName">ชื่อ-สกุล</label>
                 </div>
 
                 <div class="form-floating mb-2">
                     <input type="text" class="form-control" name="caddress1" value="<?=$data['c_address1'];?>" id="floatinAddress" placeholder="ที่อยู่" readonly>
-                    <label for="floatinAddress"><span class="f1">ที่อยู่1</span></label>
+                    <label for="floatinAddress">ที่อยู่1</label>
                 </div>
 				             <div class="form-floating mb-2">
                     <input type="text" class="form-control" name="caddress2" value="<?=$data['c_address2'];?>" id="floatinAddress" placeholder="ที่อยู่" readonly>
-                    <label for="floatinAddress"><span class="f1">ที่อยู่2</span></label>
+                    <label for="floatinAddress">ที่อยู่2</label>
                 </div>
 				             <div class="form-floating mb-2">
                     <input type="text" class="form-control" name="caddress3" value="<?=$data['c_address3'];?>" id="floatinAddress" placeholder="ที่อยู่" readonly>
-                    <label for="floatinAddress"><span class="f1">ที่อยู่3</span></label>
+                    <label for="floatinAddress">ที่อยู่3</label>
                 </div>
 
                 <div class="form-floating mb-2">
                     <input type="text" class="form-control" name="cphonnumber" value="<?=$data['c_phonnumber'];?>" id="floatinPhoneNum" placeholder="เบอร์โทร" readonly>
-                    <label for="floatinPhoneNum"><span class="f1">เบอร์โทร</span></label>
+                    <label for="floatinPhoneNum">เบอร์โทร</label>
                 </div>
                 <div class="form-floating mb-2">
                     <input type="email" class="form-control" name="cemail" value="<?=$data['c_email'];?>" id="floatingInput" placeholder="name@example.com" readonly>
-                    <label for="floatingInput"><span class="f1">Email address</span></label>
+                    <label for="floatingInput">Email address</label>
                 </div>
 
                 <div class="form-floating mb-3">
                     <input type="password" class="form-control" name="cpassword" value="<?=$data['c_password'];?>"  id="floatingPassword" placeholder="Password" readonly>
-                    <label for="floatingPassword"><span class="f1">Password</span></label>
+                    <label for="floatingPassword">Password</label>
                 </div>
             </form><br>
         </main>

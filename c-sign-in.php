@@ -39,22 +39,22 @@
         <main class="form-signin w-50 m-auto">
             <form method="POST" action="">
                 <img class="mb-3" src="images/Logo.png" alt="" width="50%" height="50%">
-                <h1 class="h5 mb-3 fw-normal"><span class="f1">Please sign in</span></h1>
+                <h1 class="h5 mb-3 fw-normal">Please sign in</h1>
 
                 <div class="form-floating mb-2">
                     <input type="text" class="form-control" name="cemail" id="floatingInput" placeholder="name@example.com" required>
-                    <label for="floatingInput"><span class="f1">Email address</span></label>
+                    <label for="floatingInput">Email address</label>
                 </div>
                 <div class="form-floating mb-3">
                     <input type="password" class="form-control" name="cpassword" id="floatingPassword" placeholder="Password" required>
-                    <label for="floatingPassword"><span class="f1">Password</span></label>
+                    <label for="floatingPassword">Password</label>
                 </div>
                
-                <button class="btn btn-primary w-100 py-2" type="submit" name="Submit"><span class="f1">Sign in</span></button>
+                <button class="btn btn-primary w-100 py-2" type="submit" name="Submit">Sign in</button>
             </form>
             <br>
             <div class="text-center">
-                <h1 class="h5 mb-3 fw-normal"><span class="f1">ยังไม่มีสมาชิก/<a href="reg.php">สมัครสมาชิก</a></span></h1>
+                <h1 class="h5 mb-3 fw-normal">ยังไม่มีสมาชิก/<a href="reg.php">สมัครสมาชิก</a></h1>
             </div>
         </main>
     </div>
