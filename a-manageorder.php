@@ -166,7 +166,7 @@ while ($data = mysqli_fetch_array($rs)) {
         <form method="post" action="update_status.php">
     <input type="hidden" name="oid" value="<?=$data['oid'];?>">
     <select name="status" class="form-control f1" onchange="this.form.submit()">
-        <option value="สั่งซื้อสอนค้าสำเร็จ" <?= $data['status'] == 'สั่งซื้อสินค้าสำเร็จ' ? 'selected' : ''; ?>>สั่งซื้อสอนค้าสำเร็จ</option>
+        <option value="สั่งซื้อสินค้าสำเร็จ" <?= $data['status'] == 'สั่งซื้อสินค้าสำเร็จ' ? 'selected' : ''; ?>>สั่งซื้อสินค้าสำเร็จ</option>
         <option value="ผู้ขายกำลังเตรียมพัสดุ" <?= $data['status'] == 'ผู้ขายกำลังเตรียมพัสดุ' ? 'selected' : ''; ?>>ผู้ขายกำลังเตรียมพัสดุ</option>
         <option value="จัดส่งสำเร็จ" <?= $data['status'] == 'จัดส่งสำเร็จ' ? 'selected' : ''; ?>>จัดส่งสำเร็จ</option>
         <option value="จัดส่งไม่สำเร็จ" <?= $data['status'] == 'จัดส่งไม่สำเร็จ' ? 'selected' : ''; ?>>จัดส่งไม่สำเร็จ</option>

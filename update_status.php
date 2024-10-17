@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // กลับไปยังหน้าก่อนหน้า
-    header("Location:a-manageorder.php"); // เปลี่ยนเป็นหน้าที่ต้องการหลังอัปเดต
+    header("Location:a-manageorder.php"); 
     exit();
 }
 ?>
