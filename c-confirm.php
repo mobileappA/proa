@@ -61,7 +61,7 @@ $show_address3 = !empty($data['c_address3']);
         <main class="form-signin w-50 m-auto">
             <form method="POST" action=" ">
 
-                <img class="mb-3" src="images/Logo.png" alt="" width="50%" height="50%">
+            <img class="mb-3" src="images/Logo.png" alt="" style="max-width: 100%; height: auto;" >
                 <hr>
                 <h1 class="h5 mb-3 fw-normal"><span class="f1">ยืนยันการสั่งซื้อ</span></h1>
                 <hr>
